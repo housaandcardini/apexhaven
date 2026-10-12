@@ -102,20 +102,24 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 top-0 z-40 xl:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 top-0 z-[100] xl:hidden transition-[visibility] duration-300 ${
+          open ? "visible pointer-events-auto" : "invisible pointer-events-none"
+        }`}
         aria-hidden={!open}
       >
         <div
           onClick={() => setOpen(false)}
-          className={`absolute inset-0 bg-ink/60 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 bg-ink/60 backdrop-blur-xs transition-opacity duration-300 ${
+            open ? "opacity-100" : "opacity-0"
+          }`}
         />
         <aside
           id="mobile-menu"
-          className={`absolute right-0 top-0 flex h-dvh w-[85%] max-w-sm flex-col bg-white shadow-2xl transition-transform duration-300 ${
+          className={`absolute right-0 top-0 flex h-dvh w-[85%] max-w-sm flex-col bg-white shadow-2xl transition-transform duration-300 ease-out ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex h-18 items-center justify-between border-b border-slate-100 px-5">
+          <div className="flex h-18 shrink-0 items-center justify-between border-b border-slate-100 px-5">
             <Logo />
             <button
               type="button"
@@ -128,7 +132,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <ul className="flex-1 overflow-y-auto px-3 py-4">
+          <ul className="flex-1 overflow-y-auto overscroll-contain px-3 py-4">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -145,9 +149,9 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="space-y-3 border-t border-slate-100 p-5">
+          <div className="shrink-0 space-y-3 border-t border-slate-100 p-5 bg-white">
             <a href={`tel:${site.phone.replace(/\s/g, "")}`} tabIndex={open ? 0 : -1} className="flex items-center gap-3 text-sm font-medium text-charcoal">
-              <PhoneIcon size={16} className="text-gold" /> {site.phone}
+              <PhoneIcon size={16} className="text-gold shrink-0" /> <span className="truncate">{site.phone}</span>
             </a>
             <a href={`mailto:${site.email}`} tabIndex={open ? 0 : -1} className="flex items-center gap-3 text-sm font-medium text-charcoal truncate">
               <MailIcon size={16} className="text-gold shrink-0" /> <span className="truncate">{site.email}</span>
