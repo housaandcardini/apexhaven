@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+ * Apex Haven Investments — colour convention
+ * White background, blue for actions/accents, black for text & dark surfaces.
+ */
+:root {
+  --background: #ffffff;
+  --foreground: #0b0f19;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Brand blue (buttons, links, accents) */
+  --color-brand-50: #eff5ff;
+  --color-brand-100: #dbe8fe;
+  --color-brand-200: #bfd6fe;
+  --color-brand-300: #93bbfd;
+  --color-brand-400: #6096fa;
+  --color-brand-500: #3b74f6;
+  --color-brand-600: #1f55eb;
+  --color-brand-700: #1a43d8;
+  --color-brand-800: #1b37af;
+  --color-brand-900: #1c338a;
+  --color-brand-950: #142154;
+
+  /* Brand black (text, dark sections) */
+  --color-ink: #0b0f19;
+  --color-ink-soft: #1c2333;
+
+  --font-sans: var(--font-figtree);
+  --font-display: var(--font-work);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Keep body from scrolling when the mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fade-up {
+    animation: none;
+  }
+}
