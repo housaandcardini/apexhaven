@@ -11,7 +11,7 @@ import { navLinks, site } from "@/lib/data";
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Close the mobile menu whenever the route changes.
   const [lastPath, setLastPath] = useState(pathname);
@@ -21,7 +21,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -39,6 +39,10 @@ export default function Navbar() {
   }, [open]);
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+
+  // Transparent header only on routes that start with a dark hero/banner.
+  const hasDarkHero = navLinks.some((l) => l.href === pathname);
+  const scrolled = isScrolled || !hasDarkHero;
 
   return (
     <header
@@ -75,7 +79,8 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className={buttonClasses("primary", "md", "hidden sm:inline-flex")}>
+          {/* Desktop-only CTA. `max-lg:hidden` is required: `hidden` alone loses to the base `inline-flex`. */}
+          <Link href="/contact" className={buttonClasses("primary", "md", "whitespace-nowrap max-lg:hidden")}>
             Book a Consultation
           </Link>
 

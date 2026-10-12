@@ -1,10 +1,10 @@
 import { images } from "@/assets";
 
 export const stats = [
-  { value: "350+", label: "Properties sold & leased" },
-  { value: "KES 4.2B", label: "Assets under management" },
-  { value: "180+", label: "Interiors completed" },
-  { value: "60+", label: "Supplier partners" },
+  { value: "Verified", label: "Due Diligence & Title Checks" },
+  { value: "Tailored", label: "Smart Property & Growth Plans" },
+  { value: "Bespoke", label: "Interior Concepts & Turnkey Styling" },
+  { value: "Direct", label: "Factory & Construction Sourcing" },
 ];
 
 export const processSteps = [
@@ -58,9 +58,9 @@ export const testimonials = [
 ];
 
 export const team = [
-  { name: "Daniel Mwangi", role: "Founder & CEO", image: images.team1 },
-  { name: "Aisha Njeri", role: "Head of Interior Design", image: images.team2 },
-  { name: "Brian Odhiambo", role: "Investments Director", image: images.team3 },
+  { name: "Leah Njenga", role: "Principal Real Estate Consultant", image: images.leahNjenga },
+  { name: "Daniel Mwangi", role: "Investment & Strategy Consultant", image: images.team1 },
+  { name: "Aisha Njeri", role: "Lead Interior Design Consultant", image: images.team2 },
 ];
 
 export type Faq = { question: string; answer: string };

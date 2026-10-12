@@ -26,7 +26,16 @@ export default function PageHeader({ title, description, image, crumb }: PageHea
       className="relative isolate overflow-hidden bg-ink"
       style={{ marginTop: "calc(-1 * (2.25rem + 4.5rem))" }}
     >
-      <Image src={image} alt="" fill priority placeholder="blur" sizes="100vw" className="-z-20 object-cover" />
+      <Image
+        src={image}
+        alt=""
+        fill
+        priority
+        placeholder="blur"
+        sizes="100vw"
+        style={{ objectFit: "cover" }}
+        className="-z-20"
+      />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/40" />
 
       {/* Padding-top pushes text content below the overlaid nav */}

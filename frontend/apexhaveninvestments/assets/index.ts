@@ -34,6 +34,7 @@ import blueprint from "./images/blueprint.jpg";
 import team1 from "./images/team-1.jpg";
 import team2 from "./images/team-2.jpg";
 import team3 from "./images/team-3.jpg";
+import leahNjenga from "./team/leahNjenga.jpeg";
 
 export const images = {
   heroHouse,
@@ -57,6 +58,7 @@ export const images = {
   team1,
   team2,
   team3,
+  leahNjenga,
 };
 
 export const videos = {

@@ -1,37 +1,60 @@
 @import "tailwindcss";
 
 /*
- * Apex Haven Investments — colour convention
- * White background, blue for actions/accents, black for text & dark surfaces.
+ * Apex Haven Investments — Official Brand Palette:
+ * - Forest Green:  #0B3D2E (Trust, stability, investment)
+ * - Antique Gold:  #C9A227 (Value, distinction, ambition)
+ * - Warm Ivory:    #FAF8F3 (Space, calm, refinement - background)
+ * - Charcoal:      #343434 (Clarity and readability - body text)
  */
 :root {
-  --background: #ffffff;
-  --foreground: #0b0f19;
+  --background: #FAF8F3;
+  --foreground: #343434;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Brand blue (buttons, links, accents) */
-  --color-brand-50: #eff5ff;
-  --color-brand-100: #dbe8fe;
-  --color-brand-200: #bfd6fe;
-  --color-brand-300: #93bbfd;
-  --color-brand-400: #6096fa;
-  --color-brand-500: #3b74f6;
-  --color-brand-600: #1f55eb;
-  --color-brand-700: #1a43d8;
-  --color-brand-800: #1b37af;
-  --color-brand-900: #1c338a;
-  --color-brand-950: #142154;
+  /* Forest Green - primary brand color */
+  --color-forest: #0B3D2E;
+  --color-forest-dark: #07271D;
+  --color-forest-light: #135A44;
 
-  /* Brand black (text, dark sections) */
-  --color-ink: #0b0f19;
-  --color-ink-soft: #1c2333;
+  /* Antique Gold - secondary & accent color */
+  --color-gold: #C9A227;
+  --color-gold-hover: #B5901F;
+  --color-gold-light: #F4E8C1;
+  --color-gold-soft: #FBF6E9;
 
-  --font-sans: var(--font-figtree);
-  --font-display: var(--font-work);
+  /* Warm Ivory - clean background tones */
+  --color-ivory: #FAF8F3;
+  --color-ivory-dark: #F3EFE6;
+
+  /* Charcoal - clear readable text */
+  --color-charcoal: #343434;
+  --color-charcoal-muted: #666666;
+
+  /* Brand system mapped to the official palette */
+  --color-brand-50: #FBF6E9;
+  --color-brand-100: #F4E8C1;
+  --color-brand-200: #E6CE82;
+  --color-brand-300: #D8B953;
+  --color-brand-400: #C9A227; /* Antique Gold */
+  --color-brand-500: #135A44;
+  --color-brand-600: #0B3D2E; /* Forest Green */
+  --color-brand-700: #07271D;
+  --color-brand-800: #051A13;
+  --color-brand-900: #03100B;
+  --color-brand-950: #020906;
+
+  /* Ink / Dark surfaces */
+  --color-ink: #07271D;
+  --color-ink-soft: #0B3D2E;
+
+  /* Typography: Figtree (body/UI) + Work Sans (headings via `font-display`) */
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-work), var(--font-figtree), ui-sans-serif, sans-serif;
 }
 
 html {

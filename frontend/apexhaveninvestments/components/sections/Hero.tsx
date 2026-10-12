@@ -18,21 +18,22 @@ export default function Hero() {
   return (
     <section className="relative isolate flex min-h-svh items-center overflow-hidden bg-ink" style={{ marginTop: "calc(-1 * (2.25rem + 4.5rem))" }}>
       <Image
-        src={images.heroHouse}
-        alt=""
+        src={images.villa}
+        alt="Luxury Villa"
         fill
         priority
         placeholder="blur"
         sizes="100vw"
-        className="-z-20 object-cover"
+        style={{ objectFit: "cover" }}
+        className="-z-20"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/90 via-ink/65 to-ink/20" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/95 via-ink/65 to-ink/20" />
 
       {/* Offset content so it sits below the nav */}
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8" style={{ paddingTop: "calc(2.25rem + 4.5rem + 5rem)", paddingBottom: "5rem" }}>
         <div className="max-w-2xl animate-fade-up">
           <h1 className="font-display text-4xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
-            Your haven for premium <span className="text-brand-400">real estate</span> &amp; smart investments
+            Your haven for premium <span className="text-gold">real estate</span> &amp; smart investments
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">
             From finding the right property to designing beautiful interiors and sourcing quality construction
@@ -42,8 +43,8 @@ export default function Hero() {
             <ButtonLink href="/real-estate" size="lg">
               Explore Properties <ArrowRightIcon size={18} />
             </ButtonLink>
-            <ButtonLink href="/investments" size="lg" variant="ghost-light">
-              Consult
+            <ButtonLink href="/contact" size="lg" variant="ghost-light">
+              Book a Consultation <ArrowRightIcon size={18} />
             </ButtonLink>
           </div>
         </div>
@@ -54,7 +55,7 @@ export default function Hero() {
               key={label}
               className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-medium text-white backdrop-blur"
             >
-              <Icon size={20} className="shrink-0 text-brand-300" />
+              <Icon size={20} className="shrink-0 text-gold" />
               {label}
             </li>
           ))}
