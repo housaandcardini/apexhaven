@@ -68,19 +68,19 @@ export default function Footer() {
           </ul>
           <ul className="mt-8 space-y-3 text-sm">
             <li className="flex gap-3">
-              <MapPinIcon size={18} className="mt-0.5 shrink-0 text-brand-400" />
-              {site.address}
+              <MapPinIcon size={18} className="mt-0.5 shrink-0 text-gold" />
+              <span>{site.address}</span>
             </li>
             <li>
               <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="flex gap-3 hover:text-white">
-                <PhoneIcon size={18} className="shrink-0 text-brand-400" />
-                {site.phone}
+                <PhoneIcon size={18} className="shrink-0 text-gold" />
+                <span>{site.phone}</span>
               </a>
             </li>
             <li>
               <a href={`mailto:${site.email}`} className="flex gap-3 break-all hover:text-white">
-                <MailIcon size={18} className="shrink-0 text-brand-400" />
-                {site.email}
+                <MailIcon size={18} className="shrink-0 text-gold" />
+                <span>{site.email}</span>
               </a>
             </li>
           </ul>

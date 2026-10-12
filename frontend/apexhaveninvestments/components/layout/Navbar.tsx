@@ -135,8 +135,8 @@ export default function Navbar() {
                   href={link.href}
                   tabIndex={open ? 0 : -1}
                   onClick={() => setOpen(false)}
-                  className={`block rounded-xl px-4 py-3.5 text-base font-medium ${
-                    isActive(link.href) ? "bg-brand-50 text-brand-700" : "text-ink hover:bg-slate-50"
+                  className={`block rounded-xl px-4 py-3.5 text-base font-semibold ${
+                    isActive(link.href) ? "bg-gold-soft text-forest" : "text-charcoal hover:bg-slate-50"
                   }`}
                 >
                   {link.label}
@@ -146,11 +146,11 @@ export default function Navbar() {
           </ul>
 
           <div className="space-y-3 border-t border-slate-100 p-5">
-            <a href={`tel:${site.phone.replace(/\s/g, "")}`} tabIndex={open ? 0 : -1} className="flex items-center gap-3 text-sm text-slate-700">
-              <PhoneIcon size={16} className="text-brand-600" /> {site.phone}
+            <a href={`tel:${site.phone.replace(/\s/g, "")}`} tabIndex={open ? 0 : -1} className="flex items-center gap-3 text-sm font-medium text-charcoal">
+              <PhoneIcon size={16} className="text-gold" /> {site.phone}
             </a>
-            <a href={`mailto:${site.email}`} tabIndex={open ? 0 : -1} className="flex items-center gap-3 text-sm text-slate-700">
-              <MailIcon size={16} className="text-brand-600" /> {site.email}
+            <a href={`mailto:${site.email}`} tabIndex={open ? 0 : -1} className="flex items-center gap-3 text-sm font-medium text-charcoal truncate">
+              <MailIcon size={16} className="text-gold shrink-0" /> <span className="truncate">{site.email}</span>
             </a>
             <Link
               href="/contact"

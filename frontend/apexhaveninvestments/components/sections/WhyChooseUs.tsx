@@ -21,12 +21,12 @@ export default function WhyChooseUs() {
               className="object-cover"
             />
           </div>
-          <div className="absolute -bottom-6 right-4 w-44 overflow-hidden rounded-2xl border-4 border-white shadow-xl sm:-right-6 sm:w-56">
-            <Image src={images.blueprint} alt="Architectural blueprint" placeholder="blur" sizes="224px" className="aspect-square object-cover" />
+          <div className="absolute -bottom-4 right-2 w-32 overflow-hidden rounded-2xl border-2 border-white shadow-xl sm:-bottom-6 sm:right-0 sm:w-48 lg:-right-6 lg:w-56">
+            <Image src={images.blueprint} alt="Architectural blueprint" placeholder="blur" sizes="(min-width: 640px) 224px, 128px" className="aspect-square object-cover" />
           </div>
-          <div className="absolute left-4 top-4 rounded-2xl bg-white/95 px-5 py-4 shadow-lg backdrop-blur">
-            <p className="font-display text-3xl font-semibold text-brand-700">12+</p>
-            <p className="text-xs font-medium text-slate-600">Years of experience</p>
+          <div className="absolute left-3 top-3 rounded-2xl bg-white/95 px-4 py-3 shadow-lg backdrop-blur sm:left-4 sm:top-4 sm:px-5 sm:py-4">
+            <p className="font-display text-2xl font-semibold text-forest sm:text-3xl">12+</p>
+            <p className="text-[11px] font-medium text-slate-600 sm:text-xs">Years of experience</p>
           </div>
         </div>
 

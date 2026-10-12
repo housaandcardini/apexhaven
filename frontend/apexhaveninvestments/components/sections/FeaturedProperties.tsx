@@ -16,12 +16,12 @@ export default function FeaturedProperties({ limit = 3, showAllLink = true }: { 
             description="Verified homes, apartments and off-plan units in prime locations."
           />
           {showAllLink && (
-            <ButtonLink href="/real-estate" variant="outline">
+            <ButtonLink href="/real-estate" variant="outline" className="w-full sm:w-auto">
               View all properties <ArrowRightIcon size={16} />
             </ButtonLink>
           )}
         </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 sm:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {properties.slice(0, limit).map((p) => (
             <PropertyCard key={p.id} property={p} />
           ))}

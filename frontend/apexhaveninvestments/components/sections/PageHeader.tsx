@@ -42,18 +42,18 @@ export default function PageHeader({ title, description, image, crumb }: PageHea
       <div
         className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
         style={{
-          paddingTop: "calc(2.25rem + 4.5rem + 5rem)",
-          paddingBottom: "5rem",
+          paddingTop: "calc(2.25rem + 4.5rem + 2rem)",
+          paddingBottom: "3.5rem",
         }}
       >
-        <nav aria-label="Breadcrumb" className="text-sm text-slate-300">
+        <nav aria-label="Breadcrumb" className="text-xs text-slate-300 sm:text-sm">
           <Link href="/" className="hover:text-white">
             Home
           </Link>
-          <span className="mx-2 text-brand-400">/</span>
+          <span className="mx-2 text-gold">/</span>
           <span className="text-white">{crumb}</span>
         </nav>
-        <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+        <h1 className="mt-3 max-w-3xl font-display text-2xl font-semibold leading-tight text-white sm:mt-4 sm:text-4xl lg:text-5xl">
           {title}
         </h1>
         {description && (

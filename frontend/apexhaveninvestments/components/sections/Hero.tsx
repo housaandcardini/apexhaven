@@ -30,33 +30,33 @@ export default function Hero() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/95 via-ink/65 to-ink/20" />
 
       {/* Offset content so it sits below the nav */}
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8" style={{ paddingTop: "calc(2.25rem + 4.5rem + 5rem)", paddingBottom: "5rem" }}>
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8" style={{ paddingTop: "calc(2.25rem + 4.5rem + 2.5rem)", paddingBottom: "4rem" }}>
         <div className="max-w-2xl animate-fade-up">
-          <h1 className="font-display text-4xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-3xl font-semibold leading-[1.15] text-white sm:text-5xl lg:text-6xl">
             Your haven for premium <span className="text-gold">real estate</span> &amp; smart investments
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-200 sm:mt-6 sm:text-lg">
             From finding the right property to designing beautiful interiors and sourcing quality construction
             materials — Apex Haven Investments is your single trusted partner.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/real-estate" size="lg">
+          <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+            <ButtonLink href="/real-estate" size="lg" className="w-full sm:w-auto">
               Explore Properties <ArrowRightIcon size={18} />
             </ButtonLink>
-            <ButtonLink href="/contact" size="lg" variant="ghost-light">
+            <ButtonLink href="/contact" size="lg" variant="ghost-light" className="w-full sm:w-auto">
               Book a Consultation <ArrowRightIcon size={18} />
             </ButtonLink>
           </div>
         </div>
 
-        <ul className="mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+        <ul className="mt-10 grid max-w-3xl grid-cols-2 gap-2.5 sm:mt-14 sm:grid-cols-4 sm:gap-3">
           {pillars.map(({ label, Icon }) => (
             <li
               key={label}
-              className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-medium text-white backdrop-blur"
+              className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/10 px-3 py-2.5 text-xs font-medium text-white backdrop-blur sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm"
             >
-              <Icon size={20} className="shrink-0 text-gold" />
-              {label}
+              <Icon size={18} className="shrink-0 text-gold" />
+              <span>{label}</span>
             </li>
           ))}
         </ul>

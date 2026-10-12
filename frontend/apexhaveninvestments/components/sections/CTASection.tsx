@@ -26,16 +26,16 @@ export default function CTASection({
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest-dark via-forest/90 to-forest-light/80" />
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <div className="max-w-2xl">
-            <h2 className="font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">{title}</h2>
-            <p className="mt-4 text-ivory/80">{text}</p>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight text-white">{title}</h2>
+            <p className="mt-3 text-sm sm:mt-4 sm:text-base text-ivory/80">{text}</p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <ButtonLink href="/contact" size="lg" className="bg-gold text-forest-dark hover:bg-gold-hover font-bold shadow-md">
+            <ButtonLink href="/contact" size="lg" className="w-full sm:w-auto bg-gold text-forest-dark hover:bg-gold-hover font-bold shadow-md">
               Book a Consultation <ArrowRightIcon size={18} />
             </ButtonLink>
             <a
               href={`tel:${site.phone.replace(/\s/g, "")}`}
-              className="inline-flex items-center justify-center rounded-full border border-white/60 px-7 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"
+              className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border border-white/60 px-7 py-3.5 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
               Call {site.phone}
             </a>

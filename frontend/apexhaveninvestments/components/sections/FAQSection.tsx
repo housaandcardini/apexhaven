@@ -29,15 +29,15 @@ export default function FAQSection({
               key={faq.question}
               name="faq"
               open={i === 0}
-              className="group rounded-2xl border border-slate-200 bg-white px-6 open:border-brand-200 open:shadow-md open:shadow-brand-600/5"
+              className="group rounded-2xl border border-slate-200 bg-white px-4 sm:px-6 open:border-gold/50 open:shadow-md open:shadow-forest/5"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left font-semibold text-ink [&::-webkit-details-marker]:hidden">
-                {faq.question}
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-600 transition-transform duration-300 group-open:rotate-180">
-                  <ChevronDownIcon size={18} />
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 sm:py-5 text-left text-sm sm:text-base font-semibold text-forest [&::-webkit-details-marker]:hidden">
+                <span>{faq.question}</span>
+                <span className="grid h-7 w-7 sm:h-8 sm:w-8 shrink-0 place-items-center rounded-full bg-gold-soft text-forest transition-transform duration-300 group-open:rotate-180">
+                  <ChevronDownIcon size={16} />
                 </span>
               </summary>
-              <p className="pb-6 text-sm leading-relaxed text-slate-600">{faq.answer}</p>
+              <p className="pb-5 text-xs sm:text-sm leading-relaxed text-charcoal">{faq.answer}</p>
             </details>
           ))}
         </div>

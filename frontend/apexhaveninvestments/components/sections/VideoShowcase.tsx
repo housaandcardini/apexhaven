@@ -19,7 +19,7 @@ export default function VideoShowcase({ showLink = true }: { showLink?: boolean 
             description="Take a look inside some of the interiors our design studio has brought to life."
           />
           {showLink && (
-            <ButtonLink href="/interior-design" variant="ghost-light">
+            <ButtonLink href="/interior-design" variant="ghost-light" className="w-full sm:w-auto">
               Our design studio <ArrowRightIcon size={16} />
             </ButtonLink>
           )}
