@@ -9,6 +9,7 @@ import {
   PhoneIcon,
   TikTokIcon,
   XIcon,
+  YouTubeIcon,
 } from "@/components/ui/Icons";
 import NewsletterForm from "@/components/layout/NewsletterForm";
 import { navLinks, services, site } from "@/lib/data";
@@ -20,21 +21,23 @@ export default function Footer() {
         <div className="lg:col-span-4">
           <Logo tone="light" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed">{site.description}</p>
-          <div className="mt-6 flex gap-3">
+          <div className="mt-6 flex flex-wrap gap-2.5">
             {[
-              { href: site.socials.facebook, label: "Facebook", Icon: FacebookIcon },
-              { href: site.socials.instagram, label: "Instagram", Icon: InstagramIcon },
               { href: site.socials.tiktok, label: "TikTok", Icon: TikTokIcon },
+              { href: site.socials.youtube, label: "YouTube", Icon: YouTubeIcon },
               { href: site.socials.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
+              { href: site.socials.instagram, label: "Instagram", Icon: InstagramIcon },
+              { href: site.socials.facebook, label: "Facebook", Icon: FacebookIcon },
               { href: site.socials.x, label: "X", Icon: XIcon },
             ].map(({ href, label, Icon }) => (
               <a
                 key={label}
                 href={href}
                 aria-label={label}
+                title={label}
                 target="_blank"
                 rel="noreferrer"
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-slate-300 transition-colors hover:border-brand-500 hover:bg-brand-600 hover:text-white"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-slate-300 transition-colors hover:border-gold hover:bg-forest-light hover:text-white"
               >
                 <Icon size={16} />
               </a>

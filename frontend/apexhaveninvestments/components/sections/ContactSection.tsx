@@ -1,5 +1,12 @@
 import ContactForm from "@/components/layout/ContactForm";
-import { MailIcon, MapPinIcon, PhoneIcon } from "@/components/ui/Icons";
+import {
+  LinkedinIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+  TikTokIcon,
+  YouTubeIcon,
+} from "@/components/ui/Icons";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { site } from "@/lib/data";
 
@@ -39,6 +46,40 @@ export default function ContactSection() {
               </li>
             ))}
           </ul>
+
+          {/* Official Social Channels */}
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-forest">Follow &amp; connect with us</p>
+            <div className="mt-3 flex flex-wrap gap-2.5">
+              <a
+                href={site.socials.tiktok}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-charcoal hover:border-gold hover:text-forest transition-colors shadow-2xs"
+              >
+                <TikTokIcon size={14} className="text-forest" />
+                <span>TikTok</span>
+              </a>
+              <a
+                href={site.socials.youtube}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-charcoal hover:border-gold hover:text-forest transition-colors shadow-2xs"
+              >
+                <YouTubeIcon size={14} className="text-forest" />
+                <span>YouTube</span>
+              </a>
+              <a
+                href={site.socials.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-charcoal hover:border-gold hover:text-forest transition-colors shadow-2xs"
+              >
+                <LinkedinIcon size={14} className="text-forest" />
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
         </div>
         <ContactForm />
       </div>

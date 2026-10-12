@@ -4,11 +4,11 @@ import TopBar from "@/components/layout/TopBar";
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className="flex min-h-dvh flex-col w-full max-w-full overflow-x-clip">
       <TopBar />
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 w-full max-w-full overflow-x-clip">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }

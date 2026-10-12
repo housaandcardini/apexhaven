@@ -112,14 +112,14 @@ export default function TeamSection() {
                 </Link>
                 <a
                   href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-forest/30 px-4 py-2.5 text-xs font-semibold text-forest transition-colors hover:bg-gold-soft sm:text-sm"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-forest/30 px-4 py-2.5 text-xs font-semibold text-forest transition-colors hover:bg-gold-soft sm:w-auto sm:text-sm"
                 >
                   <PhoneIcon size={15} className="text-gold" />
                   {site.phone}
                 </a>
                 <a
                   href={`mailto:${site.email}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-forest/30 px-4 py-2.5 text-xs font-semibold text-forest transition-colors hover:bg-gold-soft sm:text-sm"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-forest/30 px-4 py-2.5 text-xs font-semibold text-forest transition-colors hover:bg-gold-soft sm:w-auto sm:text-sm"
                 >
                   <MailIcon size={15} className="text-gold" />
                   Email Office

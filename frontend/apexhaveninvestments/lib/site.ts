@@ -9,11 +9,17 @@ export const site = {
   address: "Apex Towers, 5th Floor, Westlands, Nairobi",
   hours: "Mon – Sat: 8:00am – 6:00pm",
   socials: {
-    facebook: "https://facebook.com",
+    tiktok: "https://www.tiktok.com/@apex.haven.ke",
+    youtube: "https://www.youtube.com/@apexhavenkenya",
+    linkedin: "https://www.linkedin.com/company/apex-haven-investments-limited/",
     instagram: "https://instagram.com",
-    tiktok: "https://tiktok.com",
-    linkedin: "https://linkedin.com",
+    facebook: "https://facebook.com",
     x: "https://x.com",
+  },
+  handles: {
+    tiktok: "@apex.haven.ke",
+    youtube: "@apexhavenkenya",
+    linkedin: "apex-haven-investments-limited",
   },
 };
 
