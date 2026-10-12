@@ -1,9 +1,9 @@
 export const site = {
   name: "Apex Haven Investments",
   shortName: "Apex Haven",
-  tagline: "Real Estate · Investments · Interiors · Construction Supply",
+  tagline: "Invest Smarter. Build Wealth.",
   description:
-    "Apex Haven Investments helps you buy, build, furnish and grow. We deliver premium real estate, smart property investments, bespoke interior design and reliable outsourcing of building and construction materials.",
+    "Apex Haven Investments Limited delivers transparent property and investment advisory, project procurement and building solutions, bespoke interior design, and fine art curation across Kenya.",
   phone: "+254 711 440 041",
   email: "info@apexhaveninvestments.com",
   address: "Apex Towers, 5th Floor, Westlands, Nairobi",
@@ -26,9 +26,9 @@ export const site = {
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/real-estate", label: "Real Estate" },
-  { href: "/investments", label: "Investments" },
+  { href: "/property-advisory", label: "Property Advisory" },
+  { href: "/procurement-supply", label: "Procurement & Supply" },
   { href: "/interior-design", label: "Interior Design" },
-  { href: "/construction-materials", label: "Materials Sourcing" },
+  { href: "/art-curation", label: "Art Curation" },
   { href: "/contact", label: "Contact" },
 ] as const;

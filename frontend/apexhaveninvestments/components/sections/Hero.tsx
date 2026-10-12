@@ -4,10 +4,10 @@ import { ArrowRightIcon, ChartIcon, CraneIcon, HomeIcon, SofaIcon } from "@/comp
 import Image from "next/image";
 
 const pillars = [
-  { label: "Real Estate", Icon: HomeIcon },
-  { label: "Investments", Icon: ChartIcon },
+  { label: "Property Advisory", Icon: HomeIcon },
+  { label: "Procurement & Supply", Icon: CraneIcon },
   { label: "Interior Design", Icon: SofaIcon },
-  { label: "Materials Sourcing", Icon: CraneIcon },
+  { label: "Art Curation", Icon: ChartIcon },
 ];
 
 /** Full-bleed homepage hero with a static property image background.
@@ -32,19 +32,21 @@ export default function Hero() {
       {/* Offset content so it sits below the nav */}
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8" style={{ paddingTop: "calc(2.25rem + 4.5rem + 2.5rem)", paddingBottom: "4rem" }}>
         <div className="max-w-2xl animate-fade-up">
+          <p className="inline-block rounded-full border border-gold/40 bg-gold-soft/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.25em] text-gold backdrop-blur mb-3">
+            Invest Smarter. Build Wealth.
+          </p>
           <h1 className="font-display text-3xl font-semibold leading-[1.15] text-white sm:text-5xl lg:text-6xl">
-            Your haven for premium <span className="text-gold">real estate</span> &amp; smart investments
+            Your haven for premium <span className="text-gold">property advisory</span> &amp; project solutions
           </h1>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-200 sm:mt-6 sm:text-lg">
-            From finding the right property to designing beautiful interiors and sourcing quality construction
-            materials — Apex Haven Investments is your single trusted partner.
+            Independent property guidance, building materials procurement, bespoke interior concepts, and fine art curation — transparent pricing with zero speculative claims.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
-            <ButtonLink href="/real-estate" size="lg" className="w-full sm:w-auto">
-              Explore Properties <ArrowRightIcon size={18} />
+            <ButtonLink href="#packages" size="lg" className="w-full sm:w-auto">
+              View Service Packages <ArrowRightIcon size={18} />
             </ButtonLink>
-            <ButtonLink href="/contact" size="lg" variant="ghost-light" className="w-full sm:w-auto">
-              Book a Consultation <ArrowRightIcon size={18} />
+            <ButtonLink href="/property-advisory" size="lg" variant="ghost-light" className="w-full sm:w-auto">
+              Property Advisory <ArrowRightIcon size={18} />
             </ButtonLink>
           </div>
         </div>

@@ -103,12 +103,24 @@ export default function Footer() {
           <p>
             © <CurrentYear /> {site.name}. All rights reserved.
           </p>
-          <div className="flex gap-5">
-            <Link href="/contact" className="hover:text-white">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Terms &amp; Conditions
+            </Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/contact" className="hover:text-white">
-              Terms of Service
+            <Link href="/cancellation-refunds" className="hover:text-white transition-colors">
+              Cancellation &amp; Refunds
+            </Link>
+            <Link href="/service-limitations" className="hover:text-white transition-colors">
+              Service Limitations
+            </Link>
+            <Link href="/payment-terms" className="hover:text-white transition-colors">
+              Payment Terms
+            </Link>
+            <Link href="/admin" className="hover:text-gold transition-colors font-medium">
+              Admin Portal
             </Link>
           </div>
         </div>

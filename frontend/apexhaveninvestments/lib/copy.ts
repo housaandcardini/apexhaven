@@ -8,92 +8,66 @@ export const stats = [
 ];
 
 export const processSteps = [
-  { title: "Consultation", text: "Tell us your goals, budget and timeline — we listen first." },
-  { title: "Strategy & Design", text: "We prepare options, designs, quotations or investment plans." },
-  { title: "Execution", text: "Our team and partners deliver with quality checks at every stage." },
-  { title: "Handover & Support", text: "Keys, reports or deliveries handed over — with ongoing support." },
+  { title: "Select a Package", text: "Review deliverables, transparent KSh pricing, inclusions, and timelines." },
+  { title: "Submit Brief", text: "Complete the service-specific questionnaire with your exact project details." },
+  { title: "Secure Payment", text: "Pay securely via M-Pesa or Card with instant transaction reference and receipt." },
+  { title: "Delivery & Execution", text: "Our team delivers the agreed deliverables within the stated timeframe." },
 ];
 
 export const whyUs = [
   {
-    title: "End-to-end under one roof",
-    text: "Buy land, build, furnish and invest — without juggling multiple vendors.",
+    title: "Transparent & Itemized Pricing",
+    text: "View package pricing upfront in KSh with clearly disclosed inclusions, exclusions, and deliverables before committing.",
   },
   {
-    title: "Verified & transparent",
-    text: "Every property is title-checked and every quote is itemised. No hidden costs.",
+    title: "Rigorous Legal Due Diligence",
+    text: "Title deeds, land registry records, and supplier KEBS certifications are independently verified to protect your capital.",
   },
   {
-    title: "Experienced team",
-    text: "Agents, analysts, designers and procurement specialists with 10+ years' experience.",
+    title: "Turnkey Multi-Disciplinary Haven",
+    text: "From property acquisition and construction materials sourcing to bespoke interior fit-outs and curated art under one trusted partner.",
   },
   {
-    title: "Strong supplier network",
-    text: "Direct relationships with manufacturers mean better prices and reliable delivery.",
-  },
-];
-
-export const testimonials = [
-  {
-    quote:
-      "Apex Haven found us our dream home in Karen and then their design team furnished it beautifully. Seamless from start to finish.",
-    name: "Grace Wanjiru",
-    role: "Homeowner",
-    image: images.team2,
-  },
-  {
-    quote:
-      "Their Growth plan has consistently beaten my expectations. The quarterly reports are clear and the team is always reachable.",
-    name: "Michael Otieno",
-    role: "Investor",
-    image: images.team1,
-  },
-  {
-    quote:
-      "We source all our tiles, steel and fittings through Apex Haven. Deliveries are on time and pricing is very competitive.",
-    name: "James Kariuki",
-    role: "Contractor",
-    image: images.team3,
+    title: "Direct Supplier & Trade Network",
+    text: "Direct partnerships with verified manufacturers and artists across Kenya ensure wholesale rates and dependable logistics.",
   },
 ];
 
 export const team = [
-  { name: "Leah Njenga", role: "Principal Real Estate Consultant", image: images.leahNjenga },
-  { name: "Daniel Mwangi", role: "Investment & Strategy Consultant", image: images.team1 },
-  { name: "Aisha Njeri", role: "Lead Interior Design Consultant", image: images.team2 },
+  { name: "Leah Njenga", role: "Founder & Principal Real Estate Consultant", image: images.leahNjenga },
 ];
 
 export type Faq = { question: string; answer: string };
 
 export const generalFaqs: Faq[] = [
   {
-    question: "What services does Apex Haven Investments offer?",
+    question: "What principal services does Apex Haven Investments Limited offer?",
     answer:
-      "We offer four connected services: real estate sales and rentals, property investment plans, interior design and fit-outs, and outsourcing of building and construction materials.",
+      "We operate across four specialized pillars: (1) Property and Investment Advisory, (2) Procurement, Project Supply and Building Solutions, (3) Interior Design and Spatial Solutions, and (4) Art, Curation and Commissions.",
   },
   {
-    question: "Do you verify the properties you list?",
+    question: "How does your pricing work?",
     answer:
-      "Yes. Every property goes through title search, land registry checks and a physical inspection before it is listed on our platform.",
+      "We believe in complete pricing transparency. Discrete services (such as Discovery Consultations, Property Shortlists, Comparison Reports, and Single-Room Concepts) have fixed, published prices in KSh. Larger multi-room fit-outs, project procurement, and custom art commissions follow a formal, written quotation process.",
   },
   {
-    question: "How do I start investing with you?",
+    question: "What payment methods are supported?",
     answer:
-      "Book a free consultation. We'll understand your goals and risk appetite, then recommend a plan. Our Starter plan begins from KES 500,000.",
+      "We accept M-Pesa (via automated prompt / Paybill instructions) and major debit/credit cards (Visa and Mastercard). Every transaction receives an immediate authenticated confirmation, unique order number, and itemized tax invoice receipt.",
   },
   {
-    question: "Can you design an interior for a property I already own?",
+    question: "Do you guarantee investment returns or property appreciation?",
     answer:
-      "Absolutely. We work on new builds, renovations and single-room makeovers, and can handle everything from concept to final styling.",
+      "No. In compliance with strict professional and Kenyan regulatory standards, we do not make speculative guarantees. Our advisory provides thorough due diligence, market valuation auditing, and historical data to help you make informed, risk-adjusted decisions.",
   },
   {
-    question: "Which construction materials can you source?",
+    question: "What happens after I book and pay for a package?",
     answer:
-      "Cement, steel, tiles, timber, plumbing, electrical, doors, windows, paints and more — from trusted local manufacturers and international suppliers.",
+      "You receive an instant payment confirmation, a unique order reference number, and a receipt. Our advisory desk contacts you within 24 business hours to confirm your scheduled consultation or initiate your research brief.",
   },
   {
-    question: "Do you deliver materials outside Nairobi?",
+    question: "Can I request a custom quotation for a large construction or interior project?",
     answer:
-      "Yes, we deliver countrywide and can arrange regional imports. Delivery costs are included transparently in every quotation.",
+      "Yes. For extensive construction procurement, full-residence interior fit-outs, or corporate art commissions, submit a project brief through our quotation forms. We will assess the scope, obtain verified trade pricing, and issue a formal written proposal.",
   },
 ];

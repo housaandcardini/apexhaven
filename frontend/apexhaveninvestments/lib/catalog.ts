@@ -5,6 +5,7 @@ export type Service = {
   slug: string;
   href: string;
   title: string;
+  shortTitle: string;
   summary: string;
   image: StaticImageData;
   icon: "home" | "chart" | "sofa" | "crane";
@@ -13,152 +14,64 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "real-estate",
-    href: "/real-estate",
-    title: "Real Estate",
+    slug: "property-advisory",
+    href: "/property-advisory",
+    title: "Property and Investment Advisory",
+    shortTitle: "Property Advisory",
     summary:
-      "Residential and commercial properties for sale and rent — handpicked, verified and ready for you to move in or lease out.",
+      "Independent guidance for property buyers and investors in Kenya. Discovery sessions, vetted shortlists, and analytical comparison reports with title verification.",
     image: images.luxuryHouse,
     icon: "home",
-    points: ["Verified title deeds", "Homes, apartments & land", "Property management"],
+    points: [
+      "Property Discovery Consultation (KSh 3,000)",
+      "Vetted Property Shortlist (KSh 7,500)",
+      "Property Comparison Report (KSh 15,000)",
+    ],
   },
   {
-    slug: "investments",
-    href: "/investments",
-    title: "Property Investments",
+    slug: "procurement-supply",
+    href: "/procurement-supply",
+    title: "Procurement, Project Supply and Building Solutions",
+    shortTitle: "Procurement & Supply",
     summary:
-      "Grow your wealth with off-plan projects, rental portfolios and land banking backed by market research and transparent reporting.",
-    image: images.skyscraper,
-    icon: "chart",
-    points: ["Off-plan opportunities", "Rental yield portfolios", "Quarterly performance reports"],
+      "Direct factory sourcing, trade wholesale pricing and delivery coordination for building materials, structural components, finishes, and solar systems.",
+    image: images.construction1,
+    icon: "crane",
+    points: [
+      "Single-Category Supplier Discovery (KSh 5,000)",
+      "Multi-Category Sourcing Brief (KSh 15,000)",
+      "Turnkey Project Procurement (Quotation-based)",
+    ],
   },
   {
     slug: "interior-design",
     href: "/interior-design",
-    title: "Interior Design",
+    title: "Interior Design and Spatial Solutions",
+    shortTitle: "Interior Design",
     summary:
-      "From concept boards to final styling, we design warm, functional spaces that reflect your personality and raise property value.",
+      "Bespoke spatial planning, 2D/3D visualizations, curated furniture sourcing, and turnkey execution that enhance lifestyle and property asset value.",
     image: images.interior2,
     icon: "sofa",
-    points: ["3D concepts & mood boards", "Furniture & décor sourcing", "Turnkey fit-outs"],
+    points: [
+      "Interior Design Consultation (KSh 5,000)",
+      "Single-Room Concept (from KSh 25,000)",
+      "Turnkey Residence & Fit-Out (Quotation-based)",
+    ],
   },
   {
-    slug: "construction-materials",
-    href: "/construction-materials",
-    title: "Construction Materials Sourcing",
+    slug: "art-curation",
+    href: "/art-curation",
+    title: "Art, Curation and Commissions",
+    shortTitle: "Art Curation",
     summary:
-      "We outsource and deliver quality building materials — cement, steel, tiles, timber, fittings and more — on time and on budget.",
-    image: images.construction1,
-    icon: "crane",
-    points: ["Trusted local & global suppliers", "Bulk pricing", "Site delivery & logistics"],
-  },
-];
-
-export type Property = {
-  id: string;
-  title: string;
-  location: string;
-  price: string;
-  status: "For Sale" | "For Rent" | "Off-Plan";
-  beds: number;
-  baths: number;
-  area: string;
-  image: StaticImageData;
-};
-
-export const properties: Property[] = [
-  {
-    id: "p1",
-    title: "Modern Family Villa",
-    location: "Karen, Nairobi",
-    price: "KES 85,000,000",
-    status: "For Sale",
-    beds: 5,
-    baths: 5,
-    area: "520 m²",
-    image: images.villa,
-  },
-  {
-    id: "p2",
-    title: "Contemporary Townhouse",
-    location: "Runda, Nairobi",
-    price: "KES 48,500,000",
-    status: "For Sale",
-    beds: 4,
-    baths: 4,
-    area: "340 m²",
-    image: images.heroHouse,
-  },
-  {
-    id: "p3",
-    title: "Skyline Apartments",
-    location: "Westlands, Nairobi",
-    price: "KES 180,000 / mo",
-    status: "For Rent",
-    beds: 3,
-    baths: 2,
-    area: "165 m²",
-    image: images.apartment,
-  },
-  {
-    id: "p4",
-    title: "Garden Courtyard Home",
-    location: "Kiambu Road",
-    price: "KES 32,000,000",
-    status: "For Sale",
-    beds: 4,
-    baths: 3,
-    area: "290 m²",
-    image: images.houseExterior,
-  },
-  {
-    id: "p5",
-    title: "Apex Heights (Off-Plan)",
-    location: "Kilimani, Nairobi",
-    price: "From KES 9,800,000",
-    status: "Off-Plan",
-    beds: 2,
-    baths: 2,
-    area: "110 m²",
-    image: images.city,
-  },
-  {
-    id: "p6",
-    title: "Luxury Pool Residence",
-    location: "Nyali, Mombasa",
-    price: "KES 120,000,000",
-    status: "For Sale",
-    beds: 6,
-    baths: 6,
-    area: "710 m²",
-    image: images.luxuryHouse,
-  },
-];
-
-export const investmentPlans = [
-  {
-    name: "Starter",
-    minimum: "KES 500,000",
-    return: "9 – 11% p.a.",
-    term: "12 months",
-    features: ["Pooled rental portfolio", "Quarterly payouts", "Online statements"],
-    highlighted: false,
-  },
-  {
-    name: "Growth",
-    minimum: "KES 2,500,000",
-    return: "12 – 15% p.a.",
-    term: "24 months",
-    features: ["Off-plan unit allocation", "Capital appreciation", "Dedicated advisor", "Exit flexibility"],
-    highlighted: true,
-  },
-  {
-    name: "Premier",
-    minimum: "KES 10,000,000",
-    return: "15 – 18% p.a.",
-    term: "36 months",
-    features: ["Land banking & JV projects", "Co-development rights", "Priority deal flow", "Bespoke reporting"],
-    highlighted: false,
+      "Expert fine art advisory, placement analysis, provenance checks, and bespoke commissions from celebrated and emerging East African artists.",
+    image: images.blueprint,
+    icon: "chart",
+    points: [
+      "Art Curation Consultation (KSh 5,000)",
+      "Original Artwork Sourcing (Quotation-based)",
+      "Site-Specific Artist Commissions (Quotation-based)",
+    ],
   },
 ];
 
@@ -184,12 +97,12 @@ export const designVideos = [
 ];
 
 export const designGallery = [
-  { image: images.interior1, title: "Scandi Living" },
+  { image: images.interior1, title: "Scandi Living Concept" },
   { image: images.interior2, title: "Open-Plan Lounge" },
-  { image: images.kitchen, title: "Chef's Kitchen" },
-  { image: images.interior3, title: "Accent Corner" },
-  { image: images.interior4, title: "Family Room" },
-  { image: images.apartment, title: "Penthouse Suite" },
+  { image: images.kitchen, title: "Bespoke Chef's Kitchen" },
+  { image: images.interior3, title: "Executive Study Accent" },
+  { image: images.interior4, title: "Contemporary Family Lounge" },
+  { image: images.apartment, title: "Curated Master Suite" },
 ];
 
 export const materials = [

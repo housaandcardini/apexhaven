@@ -1,23 +1,32 @@
 import { images } from "@/assets";
-import FeaturedProperties from "@/components/sections/FeaturedProperties";
 import InnerPage from "@/components/sections/InnerPage";
+import PackagesGrid from "@/components/sections/PackagesGrid";
 import ProcessSection from "@/components/sections/ProcessSection";
+import FAQSection from "@/components/sections/FAQSection";
+import TeamSection from "@/components/sections/TeamSection";
 
 export const metadata = {
-  title: "Real Estate",
-  description: "Verified homes, apartments and off-plan units in prime Kenyan locations.",
+  title: "Property & Real Estate Advisory | Apex Haven Investments",
+  description: "Independent property acquisition advisory, verified shortlists and due diligence reports in Kenya.",
 };
 
 export default function RealEstatePage() {
   return (
     <InnerPage
-      crumb="Real Estate"
-      title="Handpicked properties, ready to view"
-      description="Title-checked homes, rentals and off-plan units across Nairobi and the coast."
-      image={images.villa}
+      crumb="Property Advisory"
+      title="Property & Real Estate Advisory"
+      description="Independent title verification, curated property shortlists, and comparative analytical reports. Clear packages with upfront pricing in KSh."
+      image={images.luxuryHouse}
     >
-      <FeaturedProperties limit={6} showAllLink={false} />
-      <ProcessSection title="How buying with us works" />
+      <PackagesGrid
+        initialCategory="property-advisory"
+        title="Property Advisory Packages"
+        eyebrow="Advisory & Due Diligence"
+        description="Book a Discovery Consultation, order a curated Property Shortlist, or request an in-depth Comparison Report."
+      />
+      <TeamSection />
+      <ProcessSection title="Our Advisory Process" />
+      <FAQSection />
     </InnerPage>
   );
 }
