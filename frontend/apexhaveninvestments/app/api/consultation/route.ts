@@ -45,8 +45,10 @@ export async function POST(req: NextRequest) {
     // Generate unique reference
     const reference = `APH-${Date.now().toString().slice(-6)}`;
 
-    // 3. Dispatch notification to owner inbox
+    // 3. Dispatch notification to consultations inbox with cc to property advisory
     await sendOwnerNotification({
+      recipientEmail: "consultations@apexhaveninvestments.com",
+      ccEmail: "propertyadvisory@apexhaveninvestments.com",
       subject: `Property Enquiry / Consultation Match [${reference}]`,
       senderName: fullName,
       senderEmail: email,

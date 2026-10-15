@@ -30,9 +30,6 @@ import construction2 from "../public/assets/images/construction-2.jpg";
 import engineer from "../public/assets/images/engineer.jpg";
 import blueprint from "../public/assets/images/blueprint.jpg";
 
-import team1 from "../public/assets/images/team-1.jpg";
-import team2 from "../public/assets/images/team-2.jpg";
-import team3 from "../public/assets/images/team-3.jpg";
 import leahNjenga from "../public/assets/images/leahNjenga.jpeg";
 import logo from "../public/assets/images/logo.jpeg";
 
@@ -55,9 +52,6 @@ export const images = {
   construction2,
   engineer,
   blueprint,
-  team1,
-  team2,
-  team3,
   leahNjenga,
   logo,
 };

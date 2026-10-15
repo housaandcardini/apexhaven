@@ -7,6 +7,8 @@ interface SendNotificationOptions {
   senderPhone?: string;
   details: Record<string, string | number | undefined>;
   messageText?: string;
+  recipientEmail?: string;
+  ccEmail?: string;
 }
 
 /**
@@ -21,8 +23,10 @@ export async function sendOwnerNotification({
   senderPhone,
   details,
   messageText,
+  recipientEmail: customRecipient,
+  ccEmail,
 }: SendNotificationOptions) {
-  const recipientEmail = process.env.OWNER_EMAIL || site.email;
+  const recipientEmail = customRecipient || process.env.OWNER_EMAIL || site.email;
   const resendApiKey = process.env.RESEND_API_KEY;
 
   const htmlBody = `

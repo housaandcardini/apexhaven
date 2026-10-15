@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
+import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
 
 export interface TurnstileRef {
   reset: () => void;
@@ -36,8 +36,10 @@ declare global {
   }
 }
 
-const TURNSTILE_SITEKEY =
+const PRODUCTION_SITEKEY =
   process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAFXmbeXF3wuqTtNE";
+// Cloudflare official test key that always passes on localhost/unregistered domains
+const TEST_SITEKEY = "1x00000000000000000000AA";
 
 export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turnstile(
   { action = "contact", onSuccess, onError, onExpire, className = "", theme = "light" },
@@ -45,11 +47,28 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
 ) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const [currentKey, setCurrentKey] = useState<string>(() => {
+    // If running in browser on localhost or 127.0.0.1, check
+    if (typeof window !== "undefined") {
+      const isLocal =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+      // Allow user to use production key or fallback
+      return isLocal && process.env.NODE_ENV === "development"
+        ? PRODUCTION_SITEKEY
+        : PRODUCTION_SITEKEY;
+    }
+    return PRODUCTION_SITEKEY;
+  });
 
   useImperativeHandle(ref, () => ({
     reset: () => {
       if (typeof window !== "undefined" && window.turnstile && widgetIdRef.current) {
-        window.turnstile.reset(widgetIdRef.current);
+        try {
+          window.turnstile.reset(widgetIdRef.current);
+        } catch {
+          // ignore
+        }
       }
     },
   }));
@@ -72,13 +91,31 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
 
       try {
         const id = window.turnstile.render(containerRef.current, {
-          sitekey: TURNSTILE_SITEKEY,
+          sitekey: currentKey,
           action,
           theme,
           callback: (token: string) => {
             if (isMounted) onSuccess(token);
           },
           "error-callback": (err: unknown) => {
+            // Error 110200 is domain mismatch (e.g. localhost not added to Cloudflare widget yet)
+            const isLocal =
+              typeof window !== "undefined" &&
+              (window.location.hostname === "localhost" ||
+                window.location.hostname === "127.0.0.1");
+
+            if (isLocal && currentKey !== TEST_SITEKEY) {
+              console.warn(
+                "[Cloudflare Turnstile] Domain mismatch on localhost (Error 110200). " +
+                  "Switching to Cloudflare test sitekey for local development. " +
+                  "To use production key locally, add 'localhost' to your widget domains in Cloudflare Dashboard."
+              );
+              if (isMounted) {
+                setCurrentKey(TEST_SITEKEY);
+              }
+              return;
+            }
+
             if (isMounted && onError) onError(err);
           },
           "expired-callback": () => {
@@ -124,7 +161,7 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
         widgetIdRef.current = null;
       }
     };
-  }, [action, theme, onSuccess, onError, onExpire]);
+  }, [action, theme, currentKey, onSuccess, onError, onExpire]);
 
   return (
     <div className={`my-3 min-h-[65px] ${className}`}>
