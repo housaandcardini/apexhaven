@@ -34,9 +34,9 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Validate essential fields
-    if (!name || !email || !message) {
+    if (!name || !email || !phone || !message) {
       return NextResponse.json(
-        { error: "Name, email, and message are required." },
+        { error: "Name, email, phone number, and message are required." },
         { status: 400 }
       );
     }

@@ -23,9 +23,9 @@ export const services: Service[] = [
     image: images.luxuryHouse,
     icon: "home",
     points: [
-      "Property Discovery Consultation (KSh 3,000)",
-      "Vetted Property Shortlist (KSh 7,500)",
-      "Property Comparison Report (KSh 15,000)",
+      "Property Discovery & Strategy Sessions",
+      "Vetted Property Shortlists & Due Diligence",
+      "Detailed Comparison & Title Verification Reports",
     ],
   },
   {
@@ -38,9 +38,9 @@ export const services: Service[] = [
     image: images.construction1,
     icon: "crane",
     points: [
-      "Single-Category Supplier Discovery (KSh 5,000)",
-      "Multi-Category Sourcing Brief (KSh 15,000)",
-      "Turnkey Project Procurement (Quotation-based)",
+      "Direct Factory & Trade Supplier Sourcing",
+      "Multi-Category Material Sourcing Briefs",
+      "Turnkey Project Procurement & Delivery",
     ],
   },
   {
@@ -53,9 +53,9 @@ export const services: Service[] = [
     image: images.interior2,
     icon: "sofa",
     points: [
-      "Interior Design Consultation (KSh 5,000)",
-      "Single-Room Concept (from KSh 25,000)",
-      "Turnkey Residence & Fit-Out (Quotation-based)",
+      "Bespoke Spatial Planning & Consultations",
+      "Single-Room Concepts & 3D Visualizations",
+      "Turnkey Residential & Commercial Fit-Outs",
     ],
   },
   {
@@ -68,9 +68,9 @@ export const services: Service[] = [
     image: images.blueprint,
     icon: "chart",
     points: [
-      "Art Curation Consultation (KSh 5,000)",
-      "Original Artwork Sourcing (Quotation-based)",
-      "Site-Specific Artist Commissions (Quotation-based)",
+      "Fine Art Placement & Advisory Consultations",
+      "Original Artwork Sourcing & Provenance Checks",
+      "Site-Specific Artist Commissions",
     ],
   },
 ];

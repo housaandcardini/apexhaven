@@ -90,7 +90,7 @@ export default function ContactForm() {
         <input className={field} name="name" required placeholder="Full name *" aria-label="Full name" />
         <input className={field} name="email" type="email" required placeholder="Email address *" aria-label="Email" />
       </div>
-      <input className={field} name="phone" type="tel" placeholder="Phone / WhatsApp number (Optional)" aria-label="Phone" />
+      <input className={field} name="phone" type="tel" required placeholder="Phone / WhatsApp number *" aria-label="Phone number" />
       <select className={field} name="service" defaultValue="" aria-label="Service">
         <option value="" disabled>
           Service of interest
