@@ -8,6 +8,11 @@ export async function POST(req: NextRequest) {
     const { name, email, phone, service, message } = body;
     const token = body["cf-turnstile-response"] || body.token;
 
+    // Honeypot trap: reject if automated bot filled invisible field
+    if (body._hp_security_check) {
+      return NextResponse.json({ error: "Automated submission rejected." }, { status: 400 });
+    }
+
     // Get client IP for Cloudflare verification
     const clientIp =
       req.headers.get("cf-connecting-ip") ||

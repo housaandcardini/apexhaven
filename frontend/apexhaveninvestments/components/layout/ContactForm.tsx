@@ -34,6 +34,7 @@ export default function ContactForm() {
       phone: formData.get("phone"),
       service: formData.get("service"),
       message: formData.get("message"),
+      _hp_security_check: formData.get("_hp_security_check"),
       "cf-turnstile-response": turnstileToken,
     };
 
@@ -72,7 +73,7 @@ export default function ContactForm() {
         </div>
         <h4 className="font-display text-lg font-bold text-forest">Message Received!</h4>
         <p className="mt-2 text-sm leading-relaxed text-brand-800">
-          Thank you for reaching out. Your inquiry has been delivered directly to our advisory desk. We will respond promptly within 24 business hours.
+          Thank you for reaching out. Your inquiry has been delivered directly to our enquiries inbox (<code>enquiries@apexhaveninvestments.com</code>). We will respond promptly within 24 business hours.
         </p>
       </div>
     );
@@ -80,6 +81,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+      {/* Invisible Honeypot Trap for Automated Bots */}
+      <div className="hidden" aria-hidden="true">
+        <input type="text" name="_hp_security_check" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <input className={field} name="name" required placeholder="Full name *" aria-label="Full name" />
         <input className={field} name="email" type="email" required placeholder="Email address *" aria-label="Email" />
@@ -116,6 +122,23 @@ export default function ContactForm() {
           onExpire={() => setTurnstileToken("")}
           onError={() => setErrorMessage("Cloudflare security check encountered an error. Please reload.")}
         />
+
+        {turnstileToken ? (
+          <p className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Human verification confirmed. Send button unlocked.
+          </p>
+        ) : (
+          <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            Complete security verification above to unlock the Send button.
+          </p>
+        )}
       </div>
 
       {errorMessage && (
@@ -124,13 +147,22 @@ export default function ContactForm() {
         </p>
       )}
 
+      {/* Locked/Unlocked Submit Button */}
       <Button
         type="submit"
         size="lg"
         disabled={isSubmitting || !turnstileToken}
-        className="w-full disabled:opacity-50"
+        className={`w-full transition-all duration-200 ${
+          !turnstileToken
+            ? "cursor-not-allowed opacity-50 bg-slate-200 text-slate-600 hover:bg-slate-200 shadow-none border border-slate-300"
+            : "bg-forest hover:bg-forest-light text-white shadow-md shadow-forest/20"
+        }`}
       >
-        {isSubmitting ? "Sending..." : "Send Message"}
+        {isSubmitting
+          ? "Sending..."
+          : !turnstileToken
+          ? "🔒 Complete verification to send"
+          : "Send Message"}
       </Button>
     </form>
   );
