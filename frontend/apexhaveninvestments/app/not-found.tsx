@@ -1,14 +1,24 @@
+import { images } from "@/assets";
+import InnerPage from "@/components/sections/InnerPage";
 import { ButtonLink } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <section className="mx-auto flex max-w-xl flex-col items-center px-4 py-24 text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-600">404</p>
-      <h1 className="mt-4 font-display text-4xl font-semibold text-ink">Page not found</h1>
-      <p className="mt-4 text-slate-600">The page you are looking for does not exist or has moved.</p>
-      <ButtonLink href="/" className="mt-8">
-        Back to home
-      </ButtonLink>
-    </section>
+    <InnerPage
+      crumb="404 Not Found"
+      title="Page Not Found"
+      description="The page you are looking for does not exist, has been removed, or has moved."
+      image={images.luxuryHouse}
+      cta={false}
+    >
+      <div className="mx-auto flex max-w-xl flex-col items-center px-4 py-16 text-center">
+        <p className="text-sm text-slate-600">
+          Please check the URL or return to our homepage to explore property opportunities and advisory packages.
+        </p>
+        <ButtonLink href="/" className="mt-8">
+          Back to Homepage
+        </ButtonLink>
+      </div>
+    </InnerPage>
   );
 }

@@ -22,10 +22,7 @@ type PageHeaderProps = {
  */
 export default function PageHeader({ title, description, image, crumb }: PageHeaderProps) {
   return (
-    <section
-      className="relative isolate overflow-hidden bg-ink"
-      style={{ marginTop: "calc(-1 * (2.25rem + 4.5rem))" }}
-    >
+    <section className="relative isolate overflow-hidden bg-ink">
       <Image
         src={image}
         alt=""
@@ -36,16 +33,10 @@ export default function PageHeader({ title, description, image, crumb }: PageHea
         style={{ objectFit: "cover" }}
         className="-z-20"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/40" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink from-15% via-ink/70 via-50% to-transparent" />
 
       {/* Padding-top pushes text content below the overlaid nav */}
-      <div
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-        style={{
-          paddingTop: "calc(2.25rem + 4.5rem + 2rem)",
-          paddingBottom: "3.5rem",
-        }}
-      >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-14 sm:pt-36 sm:pb-16">
         <nav aria-label="Breadcrumb" className="text-xs text-slate-300 sm:text-sm">
           <Link href="/" className="hover:text-white">
             Home

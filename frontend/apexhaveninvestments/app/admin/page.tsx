@@ -218,7 +218,7 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-charcoal">
+    <div className="min-h-screen bg-slate-50 text-charcoal pt-18">
       {/* Top Navbar */}
       <header className="border-b border-slate-200 bg-forest px-4 py-4 sm:px-8 text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between">

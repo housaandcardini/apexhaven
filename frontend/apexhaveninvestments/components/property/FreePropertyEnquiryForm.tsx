@@ -94,12 +94,7 @@ export default function FreePropertyEnquiryForm() {
     <div id="free-enquiry" className="rounded-3xl border border-gold/30 bg-white p-6 sm:p-10 shadow-xl scroll-mt-24">
       {/* Header */}
       <div className="max-w-2xl">
-        <div className="inline-flex items-center gap-2 rounded-full bg-forest/10 px-3 py-1 text-xs font-bold text-forest uppercase tracking-wider">
-          <span>Path A: Zero Obligation</span>
-          <span className="h-1 w-1 rounded-full bg-gold" />
-          <span className="text-gold-hover">Free Property Enquiry</span>
-        </div>
-        <h3 className="mt-3 font-display text-2xl sm:text-3xl font-bold text-forest">
+        <h3 className="font-display text-2xl sm:text-3xl font-bold text-forest">
           Already know what you’re looking for?
         </h3>
         <p className="mt-2 text-sm text-charcoal-muted leading-relaxed">

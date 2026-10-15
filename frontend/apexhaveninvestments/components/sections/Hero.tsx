@@ -16,7 +16,7 @@ const pillars = [
  */
 export default function Hero() {
   return (
-    <section className="relative isolate flex min-h-svh items-center overflow-hidden bg-ink" style={{ marginTop: "calc(-1 * (2.25rem + 4.5rem))" }}>
+    <section className="relative isolate flex min-h-svh items-center overflow-hidden bg-ink">
       <Image
         src={images.villa}
         alt="Luxury Villa"
@@ -27,14 +27,11 @@ export default function Hero() {
         style={{ objectFit: "cover" }}
         className="-z-20"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/95 via-ink/65 to-ink/20" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink from-15% via-ink/70 via-50% to-transparent" />
 
       {/* Offset content so it sits below the nav */}
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8" style={{ paddingTop: "calc(2.25rem + 4.5rem + 2.5rem)", paddingBottom: "4rem" }}>
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-16 sm:pt-36 sm:pb-20">
         <div className="max-w-2xl animate-fade-up">
-          <p className="inline-block rounded-full border border-gold/40 bg-gold-soft/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.25em] text-gold backdrop-blur mb-3">
-            Invest Smarter. Build Wealth.
-          </p>
           <h1 className="font-display text-3xl font-semibold leading-[1.15] text-white sm:text-5xl lg:text-6xl">
             Your haven for premium <span className="text-gold">property advisory</span> &amp; project solutions
           </h1>
@@ -42,7 +39,7 @@ export default function Hero() {
             Independent property guidance, building materials procurement, bespoke interior concepts, and fine art curation — transparent pricing with zero speculative claims.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
-            <ButtonLink href="#packages" size="lg" className="w-full sm:w-auto">
+            <ButtonLink href="/pricing" size="lg" className="w-full sm:w-auto">
               View Service Packages <ArrowRightIcon size={18} />
             </ButtonLink>
             <ButtonLink href="/property-advisory" size="lg" variant="ghost-light" className="w-full sm:w-auto">

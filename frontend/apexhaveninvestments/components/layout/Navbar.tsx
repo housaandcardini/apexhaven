@@ -77,14 +77,14 @@ export default function Navbar() {
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
-  // Transparent header only on routes that start with a dark hero/banner.
-  const hasDarkHero = navLinks.some((l) => l.href === pathname);
+  // Transparent header on all public pages with dark hero banners; solid on admin
+  const hasDarkHero = pathname !== "/admin";
   const scrolled = isScrolled || !hasDarkHero;
 
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full overflow-x-clip border-b transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full overflow-x-hidden border-b transition-all duration-300 ${
           scrolled
             ? "border-slate-200 bg-white/95 shadow-sm backdrop-blur"
             : "border-transparent bg-transparent"
@@ -100,7 +100,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   aria-current={isActive(link.href) ? "page" : undefined}
-                  className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`rounded-full px-2.5 2xl:px-3.5 py-2 text-xs 2xl:text-sm font-medium transition-colors ${
                     isActive(link.href)
                       ? scrolled
                         ? "bg-brand-50 text-brand-700"

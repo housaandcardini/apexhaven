@@ -67,36 +67,23 @@ export default function PropertyAdvisoryPage() {
       {/* =========================================================
           HERO SECTION — Structure 1: Property & Investment Advisory
           ========================================================= */}
-      <section className="relative overflow-hidden bg-forest-dark text-white pt-24 pb-20 sm:pt-32 sm:pb-28 lg:pt-36 lg:pb-32">
+      <section className="relative isolate overflow-hidden bg-forest-dark text-white pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pt-40 lg:pb-32">
         {/* Ambient background image with luxury overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={images.luxuryHouse}
-            alt="Apex Haven Property & Investment Advisory"
-            fill
-            priority
-            placeholder="blur"
-            sizes="100vw"
-            className="object-cover object-center opacity-25 mix-blend-luminosity"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-forest-dark/95 via-forest-dark/85 to-forest-dark" />
-        </div>
+        <Image
+          src={images.luxuryHouse}
+          alt="Apex Haven Property & Investment Advisory"
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          className="object-cover object-center opacity-30 mix-blend-luminosity -z-20"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest-dark from-15% via-forest-dark/70 via-50% to-transparent" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            {/* Slogan & Category Tag */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 backdrop-blur-xs">
-              <span className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-gold">
-                Invest Smarter. Build Wealth.
-              </span>
-              <span className="h-1 w-1 rounded-full bg-gold" />
-              <span className="text-[11px] font-semibold text-white/90">
-                Property &amp; Investment Advisory
-              </span>
-            </div>
-
             {/* Headline */}
-            <h1 className="mt-6 font-display text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
+            <h1 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
               Property decisions, approached strategically.
             </h1>
 
@@ -123,16 +110,6 @@ export default function PropertyAdvisoryPage() {
                 <span className="text-gold">↓</span>
               </a>
             </div>
-
-            {/* Visible Free Option Callout */}
-            <div className="mt-6 flex items-center gap-2 text-xs sm:text-sm text-gold-light">
-              <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-gold/20 text-gold text-[10px] font-bold">
-                ✓
-              </span>
-              <span>
-                Not ready to pay? Start with a <a href="#free-enquiry" className="underline font-bold text-white hover:text-gold">Free Property Enquiry</a> with zero commitment.
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -146,10 +123,7 @@ export default function PropertyAdvisoryPage() {
             {/* Card Pathway A */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-forest bg-forest/10 px-2.5 py-1 rounded-full">
-                  Pathway A: Free Matching
-                </span>
-                <h3 className="mt-3 font-display text-xl font-bold text-forest">
+                <h3 className="font-display text-xl font-bold text-forest">
                   Already Know What You Want?
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-charcoal-muted leading-relaxed">
@@ -170,10 +144,7 @@ export default function PropertyAdvisoryPage() {
             {/* Card Pathway B */}
             <div className="rounded-2xl border border-gold/40 bg-white p-6 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-forest bg-gold/20 px-2.5 py-1 rounded-full">
-                  Pathway B: Paid Advisory
-                </span>
-                <h3 className="mt-3 font-display text-xl font-bold text-forest">
+                <h3 className="font-display text-xl font-bold text-forest">
                   Need Help Researching &amp; Evaluating?
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-charcoal-muted leading-relaxed">
@@ -209,12 +180,7 @@ export default function PropertyAdvisoryPage() {
       <section id="advisory-packages" className="bg-white py-16 sm:py-20 lg:py-24 border-y border-slate-200 scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-xs font-bold text-forest uppercase tracking-wider">
-              <span>Path B: Dedicated Advisory</span>
-              <span className="h-1 w-1 rounded-full bg-forest" />
-              <span className="text-forest">7 Launch Packages</span>
-            </div>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-forest">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-forest">
               Paid Property Advisory Packages
             </h2>
             <p className="mt-3 text-sm sm:text-base text-charcoal-muted leading-relaxed">

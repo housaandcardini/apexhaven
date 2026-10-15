@@ -1,7 +1,6 @@
 import CTASection from "@/components/sections/CTASection";
 import FAQSection from "@/components/sections/FAQSection";
 import Hero from "@/components/sections/Hero";
-import PackagesGrid from "@/components/sections/PackagesGrid";
 import ProcessSection from "@/components/sections/ProcessSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import StatsSection from "@/components/sections/StatsSection";
@@ -15,7 +14,6 @@ export default function Home() {
       <Hero />
       <ServicesSection />
       <StatsSection />
-      <PackagesGrid />
       <TeamSection />
       <VideoShowcase />
       <WhyChooseUs />
