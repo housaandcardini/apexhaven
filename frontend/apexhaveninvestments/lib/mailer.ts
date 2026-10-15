@@ -89,7 +89,42 @@ export async function sendOwnerNotification({
     </div>
   `;
 
-  // 1. Dispatch via Cloudflare Worker if configured
+  // 1. Dispatch via Resend API (Primary Provider)
+  if (resendApiKey) {
+    try {
+      const fromEmail =
+        process.env.RESEND_FROM_EMAIL ||
+        "Apex Haven <notifications@apexhaveninvestments.com>";
+
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: fromEmail,
+          to: [recipientEmail],
+          reply_to: senderEmail,
+          subject: subject,
+          html: htmlBody,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (res.ok) {
+        console.log(`[Mailer:Resend] Email delivered successfully. ID: ${data?.id}`);
+        return { success: true, provider: "resend", id: data?.id };
+      } else {
+        console.error("[Mailer:Resend] API returned error status:", res.status, data);
+      }
+    } catch (err) {
+      console.error("[Mailer:Resend] Dispatch network error:", err);
+    }
+  }
+
+  // 2. Fallback: Dispatch via Cloudflare Worker if configured
   if (cloudflareWorkerUrl) {
     try {
       const res = await fetch(cloudflareWorkerUrl, {
@@ -111,36 +146,11 @@ export async function sendOwnerNotification({
         return { success: true, provider: "cloudflare-worker" };
       }
     } catch (err) {
-      console.error("[Mailer] Cloudflare Worker dispatch error:", err);
+      console.error("[Mailer:Worker] Cloudflare Worker dispatch error:", err);
     }
   }
 
-  // 2. Dispatch via Resend API if configured
-  if (resendApiKey) {
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "Apex Haven Enquiries <notifications@apexhaveninvestments.com>",
-          to: [recipientEmail],
-          reply_to: senderEmail,
-          subject: `[Enquiry] ${subject} - ${senderName}`,
-          html: htmlBody,
-        }),
-      });
-      if (res.ok) {
-        return { success: true, provider: "resend" };
-      }
-    } catch (err) {
-      console.error("[Mailer] Resend dispatch error:", err);
-    }
-  }
-
-  // 3. Structured log fallback
+  // 3. Fallback: Structured server log
   console.log(`[ENQUIRIES DISPATCH] To: ${recipientEmail} | Subject: ${subject} | From: ${senderEmail} (${senderName})`);
   return { success: true, provider: "logged" };
 }
