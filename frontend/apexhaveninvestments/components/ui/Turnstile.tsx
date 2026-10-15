@@ -36,10 +36,9 @@ declare global {
   }
 }
 
-const PRODUCTION_SITEKEY =
+// Official Live Site Key for Apex Haven Investments
+const TURNSTILE_SITEKEY =
   process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAFXmbeXF3wuqTtNE";
-// Cloudflare official test key that always passes on localhost/unregistered domains
-const TEST_SITEKEY = "1x00000000000000000000AA";
 
 export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turnstile(
   { action = "contact", onSuccess, onError, onExpire, className = "", theme = "light" },
@@ -47,19 +46,7 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
 ) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
-  const [currentKey, setCurrentKey] = useState<string>(() => {
-    // If running in browser on localhost or 127.0.0.1, check
-    if (typeof window !== "undefined") {
-      const isLocal =
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1";
-      // Allow user to use production key or fallback
-      return isLocal && process.env.NODE_ENV === "development"
-        ? PRODUCTION_SITEKEY
-        : PRODUCTION_SITEKEY;
-    }
-    return PRODUCTION_SITEKEY;
-  });
+  const [domainMismatch, setDomainMismatch] = useState(false);
 
   useImperativeHandle(ref, () => ({
     reset: () => {
@@ -79,7 +66,6 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
     function renderWidget() {
       if (!isMounted || !containerRef.current || !window.turnstile) return;
 
-      // Clean up any existing widget in this container
       if (widgetIdRef.current) {
         try {
           window.turnstile.remove(widgetIdRef.current);
@@ -91,31 +77,18 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
 
       try {
         const id = window.turnstile.render(containerRef.current, {
-          sitekey: currentKey,
+          sitekey: TURNSTILE_SITEKEY,
           action,
           theme,
           callback: (token: string) => {
             if (isMounted) onSuccess(token);
           },
           "error-callback": (err: unknown) => {
-            // Error 110200 is domain mismatch (e.g. localhost not added to Cloudflare widget yet)
-            const isLocal =
-              typeof window !== "undefined" &&
-              (window.location.hostname === "localhost" ||
-                window.location.hostname === "127.0.0.1");
-
-            if (isLocal && currentKey !== TEST_SITEKEY) {
-              console.warn(
-                "[Cloudflare Turnstile] Domain mismatch on localhost (Error 110200). " +
-                  "Switching to Cloudflare test sitekey for local development. " +
-                  "To use production key locally, add 'localhost' to your widget domains in Cloudflare Dashboard."
-              );
-              if (isMounted) {
-                setCurrentKey(TEST_SITEKEY);
-              }
-              return;
+            // Error code 110200 indicates the current domain (e.g. localhost) is not registered in Cloudflare
+            const errStr = String(err ?? "");
+            if (errStr.includes("110200")) {
+              if (isMounted) setDomainMismatch(true);
             }
-
             if (isMounted && onError) onError(err);
           },
           "expired-callback": () => {
@@ -128,7 +101,6 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
       }
     }
 
-    // Load Turnstile script if not already loaded
     const scriptId = "cf-turnstile-script";
     if (typeof window !== "undefined") {
       if (window.turnstile) {
@@ -161,11 +133,16 @@ export const Turnstile = forwardRef<TurnstileRef, TurnstileProps>(function Turns
         widgetIdRef.current = null;
       }
     };
-  }, [action, theme, currentKey, onSuccess, onError, onExpire]);
+  }, [action, theme, onSuccess, onError, onExpire]);
 
   return (
     <div className={`my-3 min-h-[65px] ${className}`}>
       <div ref={containerRef} className="cf-turnstile" />
+      {domainMismatch && (
+        <div className="mt-2 rounded-xl bg-amber-50 p-2.5 text-xs text-amber-800 border border-amber-200">
+          ⚠️ <strong>Domain notice (Cloudflare Turnstile):</strong> The current hostname (<code>{typeof window !== "undefined" ? window.location.hostname : "localhost"}</code>) is not listed in the widget's allowed domains in your Cloudflare Dashboard. Please add <code>localhost</code> under <strong>Turnstile &gt; Settings &gt; Domains</strong> in your Cloudflare Dashboard.
+        </div>
+      )}
     </div>
   );
 });

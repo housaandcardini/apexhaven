@@ -19,10 +19,6 @@ export async function verifyTurnstileToken({
 }): Promise<TurnstileVerifyResult> {
   const secret = process.env.TURNSTILE_SECRET;
 
-  // Support Cloudflare test dummy token in non-production
-  if (token === "XXXX.DUMMY.TOKEN.XXXX" && process.env.NODE_ENV !== "production") {
-    return { success: true, hostname: "localhost", action: expectedAction };
-  }
 
   // If secret is not set in development, provide helpful diagnostic
   if (!secret) {
