@@ -557,16 +557,16 @@ export const officialPackages: ServicePackageItem[] = [
     categoryTitle: "Interior Design and Spatial Solutions",
     name: "Interior Design Consultation",
     slug: "interior-design-consultation",
-    isQuotationBased: false,
-    price: 5000,
-    priceDisplay: "KSh 5,000",
-    taxNote: "Inclusive of applicable statutory taxes",
+    isQuotationBased: true,
+    price: 0,
+    priceDisplay: "Quotation-based",
+    taxNote: "Tailored spatial & styling consultation for your property",
     problemSolved:
       "You have an existing space or new home but feel overwhelmed about layouts, color palettes, lighting, and how to source quality furniture without overspending.",
     summary:
-      "A 75-minute consultation with our lead interior stylist/designer to evaluate your space, optimize furniture flow, choose harmonious color schemes, and prioritize your styling budget.",
+      "A dedicated consultation with our lead interior stylist/designer to evaluate your space, optimize furniture flow, choose harmonious color schemes, and prioritize your styling budget.",
     deliverables: [
-      "75-minute consultation (virtual or on-site within Nairobi)",
+      "In-depth consultation (virtual or on-site within Nairobi)",
       "Spatial layout and ergonomics assessment",
       "Color palette, textures, and lighting guidance",
       "Written Action Summary with prioritized shopping recommendations",
@@ -582,15 +582,15 @@ export const officialPackages: ServicePackageItem[] = [
     ],
     optionsIncluded: "Evaluation of up to 2 contiguous living spaces",
     revisionsIncluded: "Post-session written action guide delivered within 48 hours",
-    deliveryTimeframe: "Session scheduled within 48 to 72 business hours upon booking confirmation",
+    deliveryTimeframe: "Session scheduled within 48 to 72 business hours upon brief confirmation",
     requiredDocuments: [
       "Space photographs or floor plan sketch, brief summary of style preferences",
     ],
     outOfPocketTerms:
-      "Consultation fee includes session and written summary within Nairobi. Travel outside Nairobi quoted separately.",
+      "Consultation includes session and written summary within Nairobi. Travel outside Nairobi quoted separately.",
     cancellationTerms:
-      "Full refund with at least 24 hours notice. Rescheduling permitted once at no charge with 12 hours notice.",
-    ctaLabel: "Book & Pay — KSh 5,000",
+      "Full rescheduling permitted once at no charge with at least 12 hours notice.",
+    ctaLabel: "Request a Quote",
     featured: false,
   },
   {
@@ -599,10 +599,10 @@ export const officialPackages: ServicePackageItem[] = [
     categoryTitle: "Interior Design and Spatial Solutions",
     name: "Single-Room Concept",
     slug: "single-room-concept",
-    isQuotationBased: false,
-    price: 25000,
-    priceDisplay: "from KSh 25,000",
-    taxNote: "Inclusive of applicable statutory taxes",
+    isQuotationBased: true,
+    price: 0,
+    priceDisplay: "Quotation-based",
+    taxNote: "Custom 2D/3D visualization & shopping list tailored to your room",
     problemSolved:
       "You want a fully designed, beautiful room with clear 2D/3D visualizations and an exact shopping list, so you know exactly what to buy and where it goes.",
     summary:
@@ -632,8 +632,8 @@ export const officialPackages: ServicePackageItem[] = [
     outOfPocketTerms:
       "Fee covers complete design deliverables and shopping list. Furniture purchases funded separately by client.",
     cancellationTerms:
-      "50% refund if cancelled before 3D modeling commences. Non-refundable once initial renders are generated.",
-    ctaLabel: "Purchase Package — from KSh 25,000",
+      "Governed by milestone terms in the project quotation agreement.",
+    ctaLabel: "Request a Quote",
     featured: true,
   },
   {
@@ -673,7 +673,7 @@ export const officialPackages: ServicePackageItem[] = [
       "Design and management fee clearly itemized separately from furniture and construction fabrication costs.",
     cancellationTerms:
       "Governed by milestone terms in the formal project agreement.",
-    ctaLabel: "Request a Quotation",
+    ctaLabel: "Request a Quote",
     featured: false,
   },
 

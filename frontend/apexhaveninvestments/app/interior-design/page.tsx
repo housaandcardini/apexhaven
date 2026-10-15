@@ -4,6 +4,7 @@ import PackagesGrid from "@/components/sections/PackagesGrid";
 import DesignGallery from "@/components/sections/DesignGallery";
 import VideoShowcase from "@/components/sections/VideoShowcase";
 import FAQSection from "@/components/sections/FAQSection";
+import InteriorQuoteForm from "@/components/interior/InteriorQuoteForm";
 
 export const metadata = {
   title: "Interior Design & Spatial Solutions | Apex Haven Investments",
@@ -13,12 +14,12 @@ export const metadata = {
 
 const interiorFaqs = [
   {
-    question: "What is included in the KSh 5,000 Interior Design Consultation?",
+    question: "What is included in the Interior Design Consultation?",
     answer:
-      "A 75-minute in-depth session (virtual or on-site in Nairobi). We evaluate your room flow, lighting, and layout, formulate a customized color and texture palette, and provide a written action guide with prioritized shopping advice.",
+      "An in-depth session (virtual or on-site in Nairobi). We evaluate your room flow, lighting, and layout, formulate a customized color and texture palette, and provide a written action guide with prioritized shopping advice.",
   },
   {
-    question: "What do I receive with the Single-Room Concept (from KSh 25,000)?",
+    question: "What do I receive with the Single-Room Concept?",
     answer:
       "You receive scaled 2D layout drawings with precise furniture dimensions, bespoke digital moodboards, 2 realistic 3D visualization renders, an itemized shopping list (FF&E) with local supplier links, and 1 complete revision cycle.",
   },
@@ -39,15 +40,23 @@ export default function InteriorDesignPage() {
     <InnerPage
       crumb="Interior Design"
       title="Interior Design & Spatial Solutions"
-      description="Bespoke spatial planning, 2D/3D visualizations, and turnkey fit-outs for discerning residences, penthouses, and commercial spaces. Transparent pricing with clear deliverables."
+      description="Bespoke spatial planning, 2D/3D visualizations, and turnkey fit-outs for discerning residences, penthouses, and commercial spaces. Request a tailored quotation for your project."
       image={images.interior2}
     >
       <PackagesGrid
         initialCategory="interior-design"
         title="Interior Design Packages & Concepts"
         eyebrow="Design Packages"
-        description="Choose a consultation, single-room 3D concept, or request a quotation for a complete residence fit-out."
+        description="Explore our bespoke design solutions below. Click 'Request a Quote' on any package or submit your space parameters directly in the quotation form."
       />
+
+      {/* Dedicated Interactive Quotation Form */}
+      <section className="py-12 sm:py-16 bg-ivory/50 border-y border-gold/20" id="quote">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <InteriorQuoteForm />
+        </div>
+      </section>
+
       <VideoShowcase showLink={false} />
       <DesignGallery />
       <FAQSection

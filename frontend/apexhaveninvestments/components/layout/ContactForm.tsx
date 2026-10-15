@@ -122,23 +122,6 @@ export default function ContactForm() {
           onExpire={() => setTurnstileToken("")}
           onError={() => setErrorMessage("Cloudflare security check encountered an error. Please reload.")}
         />
-
-        {turnstileToken ? (
-          <p className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            Human verification confirmed. Send button unlocked.
-          </p>
-        ) : (
-          <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            Complete security verification above to unlock the Send button.
-          </p>
-        )}
       </div>
 
       {errorMessage && (
@@ -147,22 +130,18 @@ export default function ContactForm() {
         </p>
       )}
 
-      {/* Locked/Unlocked Submit Button */}
+      {/* Submit Button (locked until Turnstile verification passes) */}
       <Button
         type="submit"
         size="lg"
         disabled={isSubmitting || !turnstileToken}
         className={`w-full transition-all duration-200 ${
           !turnstileToken
-            ? "cursor-not-allowed opacity-50 bg-slate-200 text-slate-600 hover:bg-slate-200 shadow-none border border-slate-300"
+            ? "cursor-not-allowed opacity-50 bg-slate-200 text-slate-500 hover:bg-slate-200 shadow-none border border-slate-300"
             : "bg-forest hover:bg-forest-light text-white shadow-md shadow-forest/20"
         }`}
       >
-        {isSubmitting
-          ? "Sending..."
-          : !turnstileToken
-          ? "🔒 Complete verification to send"
-          : "Send Message"}
+        {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
     </form>
   );

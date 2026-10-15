@@ -505,22 +505,6 @@ export default function FreePropertyEnquiryForm() {
               onExpire={() => setTurnstileToken("")}
               onError={() => setErrorMessage("Cloudflare security verification encountered an error. Please refresh.")}
             />
-            {turnstileToken ? (
-              <p className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Human verification confirmed. Submission unlocked.
-              </p>
-            ) : (
-              <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                </svg>
-                Complete security verification above to unlock the Submit button.
-              </p>
-            )}
           </div>
 
           {errorMessage && (
@@ -543,11 +527,7 @@ export default function FreePropertyEnquiryForm() {
                   : "bg-forest hover:bg-forest-light text-white shadow-forest/20"
               }`}
             >
-              {isSubmitting
-                ? "Submitting Brief..."
-                : !turnstileToken
-                ? "🔒 Complete verification to submit"
-                : "Submit Free Enquiry"}
+              {isSubmitting ? "Submitting Brief..." : "Submit Free Enquiry"}
             </button>
           </div>
         </form>

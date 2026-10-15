@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import type { ServicePackageItem } from "@/lib/packages";
 import { CheckIcon, CloseIcon } from "@/components/ui/Icons";
+import Turnstile, { type TurnstileRef } from "@/components/ui/Turnstile";
 
 type QuotationModalProps = {
   pkg: ServicePackageItem;
@@ -13,6 +14,10 @@ type QuotationModalProps = {
 export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalProps) {
   const [submitted, setSubmitted] = useState(false);
   const [rfqNumber, setRfqNumber] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef<TurnstileRef>(null);
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,15 +30,58 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const generatedRfq = "APH-RFQ-" + Math.floor(10000 + Math.random() * 90000);
-    setRfqNumber(generatedRfq);
-    setSubmitted(true);
+    setErrorMessage(null);
+
+    if (!turnstileToken) {
+      setErrorMessage("Please complete the security verification before submitting.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName,
+          email,
+          phone,
+          organization,
+          servicePackage: pkg.name,
+          category: pkg.category,
+          location: projectLocation,
+          timeline: targetDate,
+          budget: estimatedBudget,
+          brief: projectBrief,
+          "cf-turnstile-response": turnstileToken,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Submission failed. Please try again.");
+      }
+
+      setRfqNumber(data.reference || "APH-RFQ-CONFIRMED");
+      setSubmitted(true);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to submit quotation request.";
+      setErrorMessage(msg);
+      setTurnstileToken("");
+      turnstileRef.current?.reset();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setErrorMessage(null);
+    setTurnstileToken("");
     onClose();
   };
 
@@ -159,14 +207,44 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
                     className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-forest focus:outline-none"
                   />
                 </div>
+
+                {/* Invisible Honeypot Trap */}
+                <div className="hidden" aria-hidden="true">
+                  <input type="text" name="_hp_security_check" tabIndex={-1} autoComplete="off" />
+                </div>
               </div>
 
-              <div className="pt-3">
+              {/* Cloudflare Turnstile */}
+              <div className="pt-2">
+                <Turnstile
+                  ref={turnstileRef}
+                  action="quote"
+                  onSuccess={(token) => {
+                    setTurnstileToken(token);
+                    setErrorMessage(null);
+                  }}
+                  onExpire={() => setTurnstileToken("")}
+                  onError={() => setErrorMessage("Security verification failed. Please try again.")}
+                />
+              </div>
+
+              {errorMessage && (
+                <p className="rounded-xl bg-red-50 p-3 text-xs font-medium text-red-700 border border-red-200">
+                  {errorMessage}
+                </p>
+              )}
+
+              <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-forest py-3.5 text-sm font-bold text-white shadow-md hover:bg-forest-light transition-colors"
+                  disabled={isSubmitting || !turnstileToken}
+                  className={`w-full rounded-full py-3.5 text-sm font-bold transition-all shadow-md ${
+                    !turnstileToken
+                      ? "bg-slate-200 text-slate-500 cursor-not-allowed shadow-none border border-slate-300"
+                      : "bg-forest hover:bg-forest-light text-white shadow-forest/20"
+                  }`}
                 >
-                  Submit Brief for Formal Quotation
+                  {isSubmitting ? "Submitting Brief..." : "Submit Brief for Formal Quotation"}
                 </button>
               </div>
             </form>
@@ -184,7 +262,12 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
                   Brief Received
                 </h3>
                 <p className="mt-1 text-xs sm:text-sm text-slate-600">
-                  Thank you, <strong>{fullName}</strong>. Your project brief has been logged under:
+                  Thank you, <strong>{fullName}</strong>. Your project brief has been logged and dispatched to{" "}
+                  <strong>
+                    {pkg.category === "interior-design"
+                      ? "interiordesign@apexhaveninvestments.com"
+                      : "enquiries@apexhaveninvestments.com"}
+                  </strong>:
                 </p>
                 <p className="mt-2 text-xl font-mono font-bold text-forest">{rfqNumber}</p>
               </div>
@@ -192,8 +275,8 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
               <div className="rounded-2xl border border-slate-200 bg-ivory p-5 text-left text-xs space-y-2">
                 <p className="font-bold text-forest uppercase tracking-wider">Next Steps:</p>
                 <ul className="space-y-1.5 list-disc list-inside text-charcoal">
-                  <li>Our specialist team evaluates your specifications against supplier trade catalogues.</li>
-                  <li>A dedicated procurement or design director will contact you via {phone} or {email}.</li>
+                  <li>Our specialist team evaluates your specifications against verified trade suppliers and architectural requirements.</li>
+                  <li>A dedicated lead director will contact you via {phone} or {email} within 24 business hours.</li>
                   <li>A formal written quotation specifying milestones, taxes, and delivery timelines will be provided.</li>
                 </ul>
               </div>
