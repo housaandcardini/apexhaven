@@ -19,7 +19,8 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
   const [turnstileToken, setTurnstileToken] = useState("");
   const turnstileRef = useRef<TurnstileRef>(null);
 
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [organization, setOrganization] = useState("");
@@ -27,6 +28,8 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
   const [estimatedBudget, setEstimatedBudget] = useState("");
   const [targetDate, setTargetDate] = useState("");
   const [projectBrief, setProjectBrief] = useState("");
+
+  const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
 
   if (!isOpen) return null;
 
@@ -47,6 +50,8 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: fullName,
+          firstName,
+          lastName,
           email,
           phone,
           organization,
@@ -82,6 +87,8 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
     setSubmitted(false);
     setErrorMessage(null);
     setTurnstileToken("");
+    setFirstName("");
+    setLastName("");
     onClose();
   };
 
@@ -123,17 +130,28 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-charcoal mb-1">Full Name *</label>
+                  <label className="block text-xs font-semibold text-charcoal mb-1">First Name *</label>
                   <input
                     type="text"
                     required
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    placeholder="e.g. Jane Kamau"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="First name *"
                     className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-forest focus:outline-none"
                   />
                 </div>
                 <div>
+                  <label className="block text-xs font-semibold text-charcoal mb-1">Last Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Last name *"
+                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-forest focus:outline-none"
+                  />
+                </div>
+                <div className="sm:col-span-2">
                   <label className="block text-xs font-semibold text-charcoal mb-1">Company / Organization</label>
                   <input
                     type="text"

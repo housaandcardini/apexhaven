@@ -19,7 +19,8 @@ export default function InteriorQuoteForm({ defaultPackage }: { defaultPackage?:
   const [selectedPackage, setSelectedPackage] = useState(
     defaultPackage || "Interior Design Consultation"
   );
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [propertyType, setPropertyType] = useState("Modern Apartment");
@@ -35,6 +36,8 @@ export default function InteriorQuoteForm({ defaultPackage }: { defaultPackage?:
   const [turnstileToken, setTurnstileToken] = useState<string>("");
   const turnstileRef = useRef<TurnstileRef>(null);
 
+  const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
+
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrorMessage(null);
@@ -48,6 +51,8 @@ export default function InteriorQuoteForm({ defaultPackage }: { defaultPackage?:
 
     const payload = {
       name: fullName,
+      firstName,
+      lastName,
       email,
       phone,
       servicePackage: selectedPackage,
@@ -87,7 +92,8 @@ export default function InteriorQuoteForm({ defaultPackage }: { defaultPackage?:
 
   const handleReset = () => {
     setSubmittedRef(null);
-    setFullName("");
+    setFirstName("");
+    setLastName("");
     setEmail("");
     setPhone("");
     setLocation("");
@@ -188,19 +194,33 @@ export default function InteriorQuoteForm({ defaultPackage }: { defaultPackage?:
           <label className="block text-xs font-bold uppercase tracking-wider text-forest mb-2.5">
             2. Your Contact Information *
           </label>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <label className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Full Name *
+                First Name *
               </label>
               <input
                 className={field}
                 type="text"
                 required
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                placeholder="e.g. Leah Njenga"
-                aria-label="Full name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First name *"
+                aria-label="First name"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                Last Name *
+              </label>
+              <input
+                className={field}
+                type="text"
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Last name *"
+                aria-label="Last name"
               />
             </div>
             <div>

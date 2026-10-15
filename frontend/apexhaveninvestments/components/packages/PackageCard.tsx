@@ -90,17 +90,19 @@ export default function PackageCard({ pkg }: { pkg: ServicePackageItem }) {
           {activePkg.problemSolved}
         </p>
 
-        {/* Price Box */}
-        <div className="mt-5 rounded-2xl bg-ivory p-4 border border-gold/20">
-          <div className="flex items-baseline gap-2">
-            <span className="font-display text-2xl sm:text-3xl font-extrabold text-forest">
-              {activePkg.priceDisplay}
-            </span>
+        {/* Price Box: Only rendered for fixed-price packages. Quotation-based services rely on the clean CTA button */}
+        {!activePkg.isQuotationBased && (
+          <div className="mt-5 rounded-2xl bg-ivory p-4 border border-gold/20">
+            <div className="flex items-baseline gap-2">
+              <span className="font-display text-2xl sm:text-3xl font-extrabold text-forest">
+                {activePkg.priceDisplay}
+              </span>
+            </div>
+            <p className="mt-1 text-[11px] font-medium text-slate-500">
+              {activePkg.taxNote}
+            </p>
           </div>
-          <p className="mt-1 text-[11px] font-medium text-slate-500">
-            {activePkg.taxNote}
-          </p>
-        </div>
+        )}
 
         {/* Metadata: Timeline & Coverage */}
         <div className="mt-4 space-y-1.5 text-xs font-semibold text-charcoal border-y border-slate-100 py-3">
