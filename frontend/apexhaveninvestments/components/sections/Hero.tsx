@@ -22,7 +22,6 @@ export default function Hero() {
         alt="Luxury Villa"
         fill
         priority
-        placeholder="blur"
         sizes="100vw"
         style={{ objectFit: "cover" }}
         className="-z-20"
