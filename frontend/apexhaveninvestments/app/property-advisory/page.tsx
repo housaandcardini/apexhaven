@@ -4,7 +4,6 @@ import { officialPackages } from "@/lib/packages";
 import PackageCard from "@/components/packages/PackageCard";
 import FreePropertyEnquiryForm from "@/components/property/FreePropertyEnquiryForm";
 import ComplianceNotice from "@/components/property/ComplianceNotice";
-import TeamSection from "@/components/sections/TeamSection";
 import FAQSection from "@/components/sections/FAQSection";
 import { ArrowRightIcon } from "@/components/ui/Icons";
 
@@ -227,10 +226,6 @@ export default function PropertyAdvisoryPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          MEET LEAH NJENGA — Principal Property Advisor
-          ========================================================= */}
-      <TeamSection />
 
       {/* =========================================================
           PROPERTY ADVISORY FAQS

@@ -3,7 +3,6 @@ import InnerPage from "@/components/sections/InnerPage";
 import PackagesGrid from "@/components/sections/PackagesGrid";
 import ProcessSection from "@/components/sections/ProcessSection";
 import FAQSection from "@/components/sections/FAQSection";
-import TeamSection from "@/components/sections/TeamSection";
 
 export const metadata = {
   title: "Property & Real Estate Advisory | Apex Haven Investments",
@@ -24,7 +23,6 @@ export default function RealEstatePage() {
         eyebrow="Advisory & Due Diligence"
         description="Book a Discovery Consultation, order a curated Property Shortlist, or request an in-depth Comparison Report."
       />
-      <TeamSection />
       <ProcessSection title="Our Advisory Process" />
       <FAQSection />
     </InnerPage>
