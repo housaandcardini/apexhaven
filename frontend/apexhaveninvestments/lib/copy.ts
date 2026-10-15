@@ -8,16 +8,28 @@ export const stats = [
 ];
 
 export const processSteps = [
-  { title: "Select a Package", text: "Review deliverables, transparent KSh pricing, inclusions, and timelines." },
-  { title: "Submit Brief", text: "Complete the service-specific questionnaire with your exact project details." },
-  { title: "Secure Payment", text: "Pay securely via M-Pesa or Card with instant transaction reference and receipt." },
-  { title: "Delivery & Execution", text: "Our team delivers the agreed deliverables within the stated timeframe." },
+  {
+    title: "Explore Services",
+    text: "Review our clear deliverables, scope, inclusions, and timelines across all four pillars.",
+  },
+  {
+    title: "Submit Project Brief",
+    text: "Share your specific space parameters, property criteria, or sourcing specifications.",
+  },
+  {
+    title: "Receive Custom Quotation",
+    text: "Get an itemized, transparent proposal and quotation tailored to your exact scope within 24 hours.",
+  },
+  {
+    title: "Delivery & Execution",
+    text: "Our dedicated team executes with precision, delivering verified results within the agreed timeframe.",
+  },
 ];
 
 export const whyUs = [
   {
-    title: "Transparent & Itemized Pricing",
-    text: "View package pricing upfront in KSh with clearly disclosed inclusions, exclusions, and deliverables before committing.",
+    title: "Transparent & Itemized Proposals",
+    text: "Clearly disclosed scope, inclusions, exclusions, and milestone deliverables before any commitment.",
   },
   {
     title: "Rigorous Legal Due Diligence",
