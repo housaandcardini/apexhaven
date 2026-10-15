@@ -117,8 +117,8 @@ export const officialPackages: ServicePackageItem[] = [
     outOfPocketTerms:
       "Fixed consultation fee. Any subsequent bespoke research or physical viewing coordination is quoted separately.",
     cancellationTerms:
-      "Full refund with at least 24 hours advance notice. Free rescheduling with at least 12 hours notice.",
-    ctaLabel: "Book & Pay — KSh 3,000",
+      "Free rescheduling with at least 12 hours advance notice. Terms confirmed in proforma invoice.",
+    ctaLabel: "Request Invoice",
     featured: false,
   },
   {
@@ -161,8 +161,8 @@ export const officialPackages: ServicePackageItem[] = [
     outOfPocketTerms:
       "Covers comprehensive desktop research and shortlist compilation. Viewing transport/escort quoted separately.",
     cancellationTerms:
-      "Full refund if cancelled before research starts (within 6 hours of brief submission). 50% refund prior to delivery.",
-    ctaLabel: "Book & Pay — KSh 7,500",
+      "Detailed brief review and confirmation before research begins. Invoiced upon brief confirmation.",
+    ctaLabel: "Request Invoice",
     featured: true,
   },
   {
@@ -203,10 +203,10 @@ export const officialPackages: ServicePackageItem[] = [
       "Details, links, brochures, or draft contracts for the candidate properties to compare",
     ],
     outOfPocketTerms:
-      "Covers comparative analysis and executive debrief. Certified land survey or registry searches billed at official registry rates.",
+      "Covers comparative analysis and executive debrief. Certified land survey or registry searches billed at official statutory rates.",
     cancellationTerms:
-      "75% refund if cancelled within 24 hours of ordering. Non-refundable once comparative research is underway.",
-    ctaLabel: "Book & Pay — KSh 15,000",
+      "Comprehensive scope and candidate properties agreed upon invoice issuance.",
+    ctaLabel: "Request Invoice",
     featured: false,
   },
   {
@@ -249,8 +249,8 @@ export const officialPackages: ServicePackageItem[] = [
     outOfPocketTerms:
       "Covers data aggregation and financial feasibility modeling. Tenant sourcing quoted separately.",
     cancellationTerms:
-      "50% refund prior to scenario modeling. Non-refundable once report draft is prepared.",
-    ctaLabel: "Book & Pay — From KSh 20,000",
+      "Scope and modeling parameters agreed prior to research kickoff.",
+    ctaLabel: "Request Invoice",
     featured: false,
   },
   {
@@ -293,8 +293,8 @@ export const officialPackages: ServicePackageItem[] = [
     outOfPocketTerms:
       "Covers desktop research and checklist formulation. On-site surveyor visits or registry searches quoted separately.",
     cancellationTerms:
-      "Full refund within 6 hours of brief submission. 50% refund prior to research delivery.",
-    ctaLabel: "Book & Pay — From KSh 15,000",
+      "Detailed brief review and confirmation before research begins.",
+    ctaLabel: "Request Invoice",
     featured: false,
   },
   {
@@ -335,10 +335,10 @@ export const officialPackages: ServicePackageItem[] = [
       "Buyer brief, country of residence, target property details or developer links",
     ],
     outOfPocketTerms:
-      "Exact deliverables and engagement duration defined prior to payment. Travel beyond Nairobi quoted separately.",
+      "Exact deliverables and engagement duration defined in proforma invoice. Travel beyond Nairobi quoted separately.",
     cancellationTerms:
-      "Full refund with 24 hours notice prior to the first virtual consultation. Pro-rated thereafter.",
-    ctaLabel: "Book & Pay — From KSh 25,000",
+      "Rescheduling available with 24 hours advance notice. Virtual sessions aligned to your local time zone.",
+    ctaLabel: "Request Invoice",
     featured: true,
   },
   {
@@ -716,8 +716,8 @@ export const officialPackages: ServicePackageItem[] = [
     outOfPocketTerms:
       "Covers curation advisory and artist dossier. Artwork purchase and delivery quoted separately.",
     cancellationTerms:
-      "Full refund with at least 24 hours notice. Rescheduling permitted once at no charge with 12 hours notice.",
-    ctaLabel: "Book & Pay — KSh 5,000",
+      "Rescheduling permitted once with 12 hours notice. Terms agreed upon proforma invoice.",
+    ctaLabel: "Request Invoice",
     featured: false,
   },
   {

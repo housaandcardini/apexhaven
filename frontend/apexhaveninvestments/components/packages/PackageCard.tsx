@@ -3,7 +3,7 @@
 import { useState, useSyncExternalStore } from "react";
 import type { ServicePackageItem } from "@/lib/packages";
 import { CheckIcon, ClockIcon, ArrowRightIcon } from "@/components/ui/Icons";
-import BookingModal from "@/components/packages/BookingModal";
+import RequestInvoiceModal from "@/components/packages/RequestInvoiceModal";
 import QuotationModal from "@/components/packages/QuotationModal";
 import AskQuestionModal from "@/components/property/AskQuestionModal";
 import { getPriceOverrides } from "@/lib/store/records";
@@ -31,7 +31,7 @@ export default function PackageCard({
   pkg: ServicePackageItem;
   hidePrices?: boolean;
 }) {
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -63,7 +63,7 @@ export default function PackageCard({
     if (isQuotation) {
       setIsQuoteOpen(true);
     } else {
-      setIsBookingOpen(true);
+      setIsInvoiceOpen(true);
     }
   };
 
@@ -221,7 +221,7 @@ export default function PackageCard({
                 : "bg-gold text-forest-dark hover:bg-gold-hover shadow-gold/20"
             }`}
           >
-            <span>{isQuotation ? "Request a Quote" : activePkg.ctaLabel}</span>
+            <span>{isQuotation ? "Request a Quote" : activePkg.ctaLabel || "Request Invoice"}</span>
             <ArrowRightIcon size={16} />
           </button>
 
@@ -236,16 +236,20 @@ export default function PackageCard({
       </article>
 
       {/* Modals */}
-      <BookingModal
+      <RequestInvoiceModal
         pkg={activePkg}
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
+        isOpen={isInvoiceOpen}
+        onClose={() => setIsInvoiceOpen(false)}
       />
       <QuotationModal
         pkg={activePkg}
         isOpen={isQuoteOpen}
         onClose={() => setIsQuoteOpen(false)}
-        destinationEmail={hidePrices ? "interiordesign@apexhaveninvestments.com" : undefined}
+        destinationEmail={
+          activePkg.category === "interior-design"
+            ? "interiordesign@apexhaveninvestments.com"
+            : "enquiries@apexhaveninvestments.com"
+        }
       />
       <AskQuestionModal
         pkg={activePkg}

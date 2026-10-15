@@ -58,7 +58,7 @@ export default function AskQuestionModal({ pkg, isOpen, onClose }: AskQuestionMo
         <div className="flex items-center justify-between border-b border-slate-100 bg-forest px-6 py-4 text-white">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-              Pre-Booking Inquiry
+              Advisory Inquiry
             </span>
             <h3 className="font-display text-lg sm:text-xl font-bold">
               Ask about {pkg.name}
@@ -103,7 +103,7 @@ export default function AskQuestionModal({ pkg, isOpen, onClose }: AskQuestionMo
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <p className="text-xs text-charcoal-muted">
-                Have questions regarding scope, turnaround times, or what documents you need before paying? Send us your question and our advisory desk will clarify promptly.
+                Have questions regarding scope, turnaround times, or what parameters you need before requesting an invoice? Send us your question and our advisory desk will clarify promptly.
               </p>
 
               <div>
