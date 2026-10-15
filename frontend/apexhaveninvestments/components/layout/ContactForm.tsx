@@ -73,7 +73,7 @@ export default function ContactForm() {
         </div>
         <h4 className="font-display text-lg font-bold text-forest">Message Received!</h4>
         <p className="mt-2 text-sm leading-relaxed text-brand-800">
-          Thank you for reaching out. Your inquiry has been delivered directly to our enquiries inbox (<code>enquiries@apexhaveninvestments.com</code>). We will respond promptly within 24 business hours.
+          Thank you for reaching out. Your inquiry has been received. Our team will respond promptly within 24 hours.
         </p>
       </div>
     );
