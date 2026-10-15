@@ -77,9 +77,7 @@ export default function Navbar() {
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
-  // Transparent header on all public pages with dark hero banners; solid on admin
-  const hasDarkHero = pathname !== "/admin";
-  const scrolled = isScrolled || !hasDarkHero;
+  const scrolled = isScrolled;
 
   return (
     <>

@@ -119,9 +119,6 @@ export default function Footer() {
             <Link href="/payment-terms" className="hover:text-white transition-colors">
               Payment Terms
             </Link>
-            <Link href="/admin" className="hover:text-gold transition-colors font-medium">
-              Admin Portal
-            </Link>
           </div>
         </div>
       </div>

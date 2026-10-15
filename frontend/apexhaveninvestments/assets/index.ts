@@ -1,40 +1,40 @@
 /**
  * Central media registry.
  *
- * - Photos live in `assets/images` and are imported statically so that
- *   `next/image` can optimise them and generate blur placeholders.
- * - Videos live in `public/assets/videos` (video files can't be imported as
- *   modules) and are referenced here by their public URL.
+ * - Photos live in `public/assets/images` for easy direct access
+ *   and are imported statically so Next.js Image handles dimensions.
+ * - Videos live in `public/assets/videos`.
  *
  * Import from "@/assets" anywhere in the app.
  */
 
-import heroHouse from "./images/hero-house.jpg";
-import houseExterior from "./images/house-exterior.jpg";
-import luxuryHouse from "./images/luxury-house.jpg";
-import villa from "./images/villa.jpg";
-import apartment from "./images/apartment.jpg";
-import keys from "./images/keys.jpg";
+import heroHouse from "../public/assets/images/hero-house.jpg";
+import houseExterior from "../public/assets/images/house-exterior.jpg";
+import luxuryHouse from "../public/assets/images/luxury-house.jpg";
+import villa from "../public/assets/images/villa.jpg";
+import apartment from "../public/assets/images/apartment.jpg";
+import keys from "../public/assets/images/keys.jpg";
 
-import interior1 from "./images/interior-1.jpg";
-import interior2 from "./images/interior-2.jpg";
-import interior3 from "./images/interior-3.jpg";
-import interior4 from "./images/interior-4.jpg";
-import kitchen from "./images/kitchen.jpg";
+import interior1 from "../public/assets/images/interior-1.jpg";
+import interior2 from "../public/assets/images/interior-2.jpg";
+import interior3 from "../public/assets/images/interior-3.jpg";
+import interior4 from "../public/assets/images/interior-4.jpg";
+import kitchen from "../public/assets/images/kitchen.jpg";
 
-import skyscraper from "./images/skyscraper.jpg";
-import city from "./images/city.jpg";
-import finance from "./images/finance.jpg";
+import skyscraper from "../public/assets/images/skyscraper.jpg";
+import city from "../public/assets/images/city.jpg";
+import finance from "../public/assets/images/finance.jpg";
 
-import construction1 from "./images/construction-1.jpg";
-import construction2 from "./images/construction-2.jpg";
-import engineer from "./images/engineer.jpg";
-import blueprint from "./images/blueprint.jpg";
+import construction1 from "../public/assets/images/construction-1.jpg";
+import construction2 from "../public/assets/images/construction-2.jpg";
+import engineer from "../public/assets/images/engineer.jpg";
+import blueprint from "../public/assets/images/blueprint.jpg";
 
-import team1 from "./images/team-1.jpg";
-import team2 from "./images/team-2.jpg";
-import team3 from "./images/team-3.jpg";
-import leahNjenga from "./team/leahNjenga.jpeg";
+import team1 from "../public/assets/images/team-1.jpg";
+import team2 from "../public/assets/images/team-2.jpg";
+import team3 from "../public/assets/images/team-3.jpg";
+import leahNjenga from "../public/assets/images/leahNjenga.jpeg";
+import logo from "../public/assets/images/logo.jpeg";
 
 export const images = {
   heroHouse,
@@ -59,6 +59,7 @@ export const images = {
   team2,
   team3,
   leahNjenga,
+  logo,
 };
 
 export const videos = {
