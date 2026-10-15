@@ -5,6 +5,23 @@ import type { ServicePackageItem } from "@/lib/packages";
 import { CheckIcon, CloseIcon } from "@/components/ui/Icons";
 import Turnstile, { type TurnstileRef } from "@/components/ui/Turnstile";
 
+const TIMELINE_OPTIONS = [
+  "In 7 days",
+  "In 30 days",
+  "In 90 days",
+  "Flexible / Planning",
+];
+
+const BUDGET_OPTIONS = [
+  "Less than KES 100,000",
+  "KES 100,000",
+  "KES 300,000",
+  "KES 1,000,000",
+  "KES 5,000,000",
+  "KES 10M+",
+  "Open to recommendation",
+];
+
 type QuotationModalProps = {
   pkg: ServicePackageItem;
   isOpen: boolean;
@@ -27,7 +44,7 @@ export default function QuotationModal({ pkg, isOpen, onClose, destinationEmail 
   const [organization, setOrganization] = useState("");
   const [projectLocation, setProjectLocation] = useState("");
   const [estimatedBudget, setEstimatedBudget] = useState("");
-  const [targetDate, setTargetDate] = useState("");
+  const [targetDate, setTargetDate] = useState("In 30 days");
   const [projectBrief, setProjectBrief] = useState("");
 
   const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
@@ -91,6 +108,11 @@ export default function QuotationModal({ pkg, isOpen, onClose, destinationEmail 
     setTurnstileToken("");
     setFirstName("");
     setLastName("");
+    setOrganization("");
+    setProjectLocation("");
+    setEstimatedBudget("");
+    setTargetDate("In 30 days");
+    setProjectBrief("");
     onClose();
   };
 
@@ -185,7 +207,7 @@ export default function QuotationModal({ pkg, isOpen, onClose, destinationEmail 
                     className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-forest focus:outline-none"
                   />
                 </div>
-                <div>
+                <div className="sm:col-span-2">
                   <label className="block text-xs font-semibold text-charcoal mb-1">Project Site / City *</label>
                   <input
                     type="text"
@@ -196,25 +218,62 @@ export default function QuotationModal({ pkg, isOpen, onClose, destinationEmail 
                     className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-forest focus:outline-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold text-charcoal mb-1">Target Start Date</label>
-                  <input
-                    type="text"
-                    value={targetDate}
-                    onChange={(e) => setTargetDate(e.target.value)}
-                    placeholder="e.g. Within 30 days / Q3 2026"
-                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-forest focus:outline-none"
-                  />
-                </div>
+
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-semibold text-charcoal mb-1">Estimated Budget Ceiling (KSh)</label>
+                  <label className="block text-xs font-semibold text-charcoal mb-1.5">
+                    Target Start Date
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {TIMELINE_OPTIONS.map((opt) => {
+                      const isSelected = targetDate === opt;
+                      return (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() => setTargetDate(opt)}
+                          className={`rounded-xl px-3.5 py-2 text-xs font-semibold border transition-all ${
+                            isSelected
+                              ? "bg-forest text-white border-forest shadow-sm ring-2 ring-gold/40"
+                              : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                          }`}
+                        >
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-semibold text-charcoal mb-1.5">
+                    Estimated Budget Ceiling (KES)
+                  </label>
                   <input
                     type="text"
                     value={estimatedBudget}
                     onChange={(e) => setEstimatedBudget(e.target.value)}
-                    placeholder="e.g. KES 5,000,000 or Open to recommendation"
-                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-forest focus:outline-none"
+                    placeholder="Type your budget (e.g. KES 300,000, KES 1M, KES 5M...)"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-charcoal placeholder:text-slate-400 focus:border-forest focus:outline-none mb-2"
                   />
+                  <div className="flex flex-wrap gap-2">
+                    {BUDGET_OPTIONS.map((opt) => {
+                      const isSelected = estimatedBudget === opt;
+                      return (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() => setEstimatedBudget(opt)}
+                          className={`rounded-xl px-3.5 py-2 text-xs font-semibold border transition-all ${
+                            isSelected
+                              ? "bg-forest text-white border-forest shadow-sm ring-2 ring-gold/40"
+                              : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                          }`}
+                        >
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-semibold text-charcoal mb-1">Project Brief &amp; Specifications *</label>
