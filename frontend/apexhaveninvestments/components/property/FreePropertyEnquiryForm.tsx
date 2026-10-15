@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { saveEnquiry } from "@/lib/store/records";
 import { CheckIcon, ArrowRightIcon } from "@/components/ui/Icons";
+import Turnstile, { type TurnstileRef } from "@/components/ui/Turnstile";
 
 type PropertyCategory = "apartment" | "house" | "commercial" | "land" | "other";
 
@@ -37,12 +38,22 @@ export default function FreePropertyEnquiryForm() {
   const [propertyLinkOrName, setPropertyLinkOrName] = useState("");
   const [message, setMessage] = useState("");
 
-  // Status
+  // Status & Turnstile
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
+  const turnstileRef = useRef<TurnstileRef>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
+
+    if (!turnstileToken) {
+      setErrorMessage("Please complete the Cloudflare security verification below.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const details: Record<string, string> = {
@@ -65,8 +76,29 @@ export default function FreePropertyEnquiryForm() {
       details.intendedUse = intendedUseLand;
     }
 
-    setTimeout(() => {
-      const saved = saveEnquiry({
+    try {
+      const res = await fetch("/api/consultation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone,
+          lookingFor: propertyCategory,
+          details,
+          message,
+          "cf-turnstile-response": turnstileToken,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Submission failed. Please try again.");
+      }
+
+      // Also persist to local store
+      saveEnquiry({
         fullName,
         email,
         phone,
@@ -75,9 +107,16 @@ export default function FreePropertyEnquiryForm() {
         message,
       });
 
+      setSubmittedRef(data.reference || `APH-${Date.now().toString().slice(-6)}`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to submit enquiry.";
+      setErrorMessage(msg);
+      // Reset Turnstile token on failure per single-use token lifecycle
+      setTurnstileToken("");
+      turnstileRef.current?.reset();
+    } finally {
       setIsSubmitting(false);
-      setSubmittedRef(saved.reference);
-    }, 700);
+    }
   };
 
   const handleReset = () => {
@@ -454,6 +493,26 @@ export default function FreePropertyEnquiryForm() {
             </p>
           </div>
 
+          {/* Cloudflare Turnstile Verification Widget */}
+          <div className="pt-2">
+            <Turnstile
+              ref={turnstileRef}
+              action="consultation"
+              onSuccess={(token) => {
+                setTurnstileToken(token);
+                setErrorMessage(null);
+              }}
+              onExpire={() => setTurnstileToken("")}
+              onError={() => setErrorMessage("Cloudflare security verification encountered an error. Please refresh.")}
+            />
+          </div>
+
+          {errorMessage && (
+            <p className="rounded-xl bg-red-50 p-3 text-xs font-medium text-red-700 border border-red-200">
+              {errorMessage}
+            </p>
+          )}
+
           {/* Submit Button */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
             <span className="text-xs text-charcoal-muted">
@@ -461,7 +520,7 @@ export default function FreePropertyEnquiryForm() {
             </span>
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !turnstileToken}
               className="w-full sm:w-auto rounded-full bg-forest px-8 py-3.5 text-sm font-bold text-white hover:bg-forest-light transition-all shadow-md shadow-forest/20 disabled:opacity-50"
             >
               {isSubmitting ? "Submitting Brief..." : "Submit Free Enquiry"}

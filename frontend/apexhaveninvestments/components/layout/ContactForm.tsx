@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import Turnstile, { type TurnstileRef } from "@/components/ui/Turnstile";
 import { services } from "@/lib/data";
 
 const field =
@@ -9,40 +10,127 @@ const field =
 
 export default function ContactForm() {
   const [done, setDone] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
+  const turnstileRef = useRef<TurnstileRef>(null);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setDone(true);
+    setErrorMessage(null);
+
+    if (!turnstileToken) {
+      setErrorMessage("Please complete the Cloudflare security verification below before sending.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      service: formData.get("service"),
+      message: formData.get("message"),
+      "cf-turnstile-response": turnstileToken,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Submission failed. Please try again.");
+      }
+
+      setDone(true);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to send message.";
+      setErrorMessage(msg);
+      // Reset Turnstile token on failure per single-use token lifecycle
+      setTurnstileToken("");
+      turnstileRef.current?.reset();
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (done) {
     return (
-      <p className="rounded-3xl border border-brand-100 bg-brand-50 p-8 text-sm leading-relaxed text-brand-800">
-        Thank you. Our team will get back to you shortly.
-      </p>
+      <div className="rounded-3xl border border-brand-200 bg-brand-50 p-8 text-center text-brand-900">
+        <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-forest text-gold">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <h4 className="font-display text-lg font-bold text-forest">Message Received!</h4>
+        <p className="mt-2 text-sm leading-relaxed text-brand-800">
+          Thank you for reaching out. Your inquiry has been delivered directly to our advisory desk. We will respond promptly within 24 business hours.
+        </p>
+      </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
+    <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-2">
-        <input className={field} name="name" required placeholder="Full name" aria-label="Full name" />
-        <input className={field} name="email" type="email" required placeholder="Email" aria-label="Email" />
+        <input className={field} name="name" required placeholder="Full name *" aria-label="Full name" />
+        <input className={field} name="email" type="email" required placeholder="Email address *" aria-label="Email" />
       </div>
-      <input className={field} name="phone" type="tel" placeholder="Phone" aria-label="Phone" />
+      <input className={field} name="phone" type="tel" placeholder="Phone / WhatsApp number (Optional)" aria-label="Phone" />
       <select className={field} name="service" defaultValue="" aria-label="Service">
         <option value="" disabled>
           Service of interest
         </option>
         {services.map((s) => (
-          <option key={s.slug} value={s.slug}>
+          <option key={s.slug} value={s.title}>
             {s.title}
           </option>
         ))}
+        <option value="Other / General Advisory">Other / General Property Advisory</option>
       </select>
-      <textarea className={`${field} min-h-32`} name="message" required placeholder="How can we help?" aria-label="Message" />
-      <Button type="submit" size="lg" className="w-full">
-        Send message
+      <textarea
+        className={`${field} min-h-32`}
+        name="message"
+        required
+        placeholder="How can we assist you with your property or investment journey? *"
+        aria-label="Message"
+      />
+
+      {/* Cloudflare Turnstile Verification Widget */}
+      <div className="pt-1">
+        <Turnstile
+          ref={turnstileRef}
+          action="contact"
+          onSuccess={(token) => {
+            setTurnstileToken(token);
+            setErrorMessage(null);
+          }}
+          onExpire={() => setTurnstileToken("")}
+          onError={() => setErrorMessage("Cloudflare security check encountered an error. Please reload.")}
+        />
+      </div>
+
+      {errorMessage && (
+        <p className="rounded-xl bg-red-50 p-3 text-xs font-medium text-red-700 border border-red-200">
+          {errorMessage}
+        </p>
+      )}
+
+      <Button
+        type="submit"
+        size="lg"
+        disabled={isSubmitting || !turnstileToken}
+        className="w-full disabled:opacity-50"
+      >
+        {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
     </form>
   );
