@@ -117,7 +117,7 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
               <div className="rounded-2xl bg-ivory p-4 border border-gold/20 text-xs text-charcoal">
                 <p className="font-bold text-forest">Quotation Process</p>
                 <p className="mt-1 leading-relaxed text-slate-600">
-                  Submit your detailed requirements below. Our team reviews project specifications, verifies supplier trade capacity, and prepares a formal, itemized proposal within 2 business days.
+                  Submit your detailed requirements below. Our team reviews project specifications, verifies supplier trade capacity, and prepares a formal, itemized proposal within 24 hours.
                 </p>
               </div>
 
