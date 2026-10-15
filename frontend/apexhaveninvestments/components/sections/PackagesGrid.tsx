@@ -10,6 +10,7 @@ type PackagesGridProps = {
   title?: string;
   eyebrow?: string;
   description?: string;
+  hidePrices?: boolean;
 };
 
 export default function PackagesGrid({
@@ -17,13 +18,28 @@ export default function PackagesGrid({
   title = "Transparent Service Packages & Pricing",
   eyebrow = "Packages & Pricing",
   description = "Fixed launch pricing and tailored quotation workflows for Kenyan property buyers, developers, interior spaces, and fine art collections.",
+  hidePrices = false,
 }: PackagesGridProps) {
   const [activeCategory, setActiveCategory] = useState<ServiceCategoryKey | "all">(initialCategory);
 
-  const filteredPackages =
+  const rawPackages =
     activeCategory === "all"
       ? officialPackages
       : officialPackages.filter((p) => p.category === activeCategory);
+
+  const filteredPackages = rawPackages.map((pkg) => {
+    if (hidePrices) {
+      return {
+        ...pkg,
+        isQuotationBased: true,
+        price: 0,
+        priceDisplay: "",
+        taxNote: "",
+        ctaLabel: "Request a Quote",
+      };
+    }
+    return pkg;
+  });
 
   return (
     <section className="py-16 sm:py-20 lg:py-24" id="packages">
@@ -62,7 +78,7 @@ export default function PackagesGrid({
         {/* Package Cards Grid */}
         <div className="mt-10 sm:mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredPackages.map((pkg) => (
-            <PackageCard key={pkg.id} pkg={pkg} />
+            <PackageCard key={pkg.id} pkg={pkg} hidePrices={hidePrices} />
           ))}
         </div>
       </div>

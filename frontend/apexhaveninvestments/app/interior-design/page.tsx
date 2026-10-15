@@ -48,6 +48,7 @@ export default function InteriorDesignPage() {
         title="Interior Design Packages & Concepts"
         eyebrow="Design Packages"
         description="Explore our bespoke design solutions below. Click 'Request a Quote' on any package or submit your space parameters directly in the quotation form."
+        hidePrices={true}
       />
 
       {/* Dedicated Interactive Quotation Form */}

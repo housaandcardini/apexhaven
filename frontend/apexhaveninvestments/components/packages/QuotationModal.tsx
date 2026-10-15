@@ -9,9 +9,10 @@ type QuotationModalProps = {
   pkg: ServicePackageItem;
   isOpen: boolean;
   onClose: () => void;
+  destinationEmail?: string;
 };
 
-export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalProps) {
+export default function QuotationModal({ pkg, isOpen, onClose, destinationEmail }: QuotationModalProps) {
   const [submitted, setSubmitted] = useState(false);
   const [rfqNumber, setRfqNumber] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,7 +57,8 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
           phone,
           organization,
           servicePackage: pkg.name,
-          category: pkg.category,
+          category: destinationEmail ? "interior-design" : pkg.category,
+          recipientEmail: destinationEmail,
           location: projectLocation,
           timeline: targetDate,
           budget: estimatedBudget,
@@ -282,9 +284,10 @@ export default function QuotationModal({ pkg, isOpen, onClose }: QuotationModalP
                 <p className="mt-1 text-xs sm:text-sm text-slate-600">
                   Thank you, <strong>{fullName}</strong>. Your project brief has been logged and dispatched to{" "}
                   <strong>
-                    {pkg.category === "interior-design"
-                      ? "interiordesign@apexhaveninvestments.com"
-                      : "enquiries@apexhaveninvestments.com"}
+                    {destinationEmail ||
+                      (pkg.category === "interior-design"
+                        ? "interiordesign@apexhaveninvestments.com"
+                        : "enquiries@apexhaveninvestments.com")}
                   </strong>:
                 </p>
                 <p className="mt-2 text-xl font-mono font-bold text-forest">{rfqNumber}</p>

@@ -24,7 +24,13 @@ function getOverridesServerSnapshot() {
   return "";
 }
 
-export default function PackageCard({ pkg }: { pkg: ServicePackageItem }) {
+export default function PackageCard({
+  pkg,
+  hidePrices = false,
+}: {
+  pkg: ServicePackageItem;
+  hidePrices?: boolean;
+}) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
@@ -51,8 +57,10 @@ export default function PackageCard({ pkg }: { pkg: ServicePackageItem }) {
     deliveryTimeframe: displayTimeline,
   };
 
+  const isQuotation = hidePrices || activePkg.isQuotationBased;
+
   const handleAction = () => {
-    if (activePkg.isQuotationBased) {
+    if (isQuotation) {
       setIsQuoteOpen(true);
     } else {
       setIsBookingOpen(true);
@@ -91,7 +99,7 @@ export default function PackageCard({ pkg }: { pkg: ServicePackageItem }) {
         </p>
 
         {/* Price Box: Only rendered for fixed-price packages. Quotation-based services rely on the clean CTA button */}
-        {!activePkg.isQuotationBased && (
+        {!isQuotation && (
           <div className="mt-5 rounded-2xl bg-ivory p-4 border border-gold/20">
             <div className="flex items-baseline gap-2">
               <span className="font-display text-2xl sm:text-3xl font-extrabold text-forest">
@@ -213,7 +221,7 @@ export default function PackageCard({ pkg }: { pkg: ServicePackageItem }) {
                 : "bg-gold text-forest-dark hover:bg-gold-hover shadow-gold/20"
             }`}
           >
-            <span>{activePkg.ctaLabel}</span>
+            <span>{isQuotation ? "Request a Quote" : activePkg.ctaLabel}</span>
             <ArrowRightIcon size={16} />
           </button>
 
@@ -237,6 +245,7 @@ export default function PackageCard({ pkg }: { pkg: ServicePackageItem }) {
         pkg={activePkg}
         isOpen={isQuoteOpen}
         onClose={() => setIsQuoteOpen(false)}
+        destinationEmail={hidePrices ? "interiordesign@apexhaveninvestments.com" : undefined}
       />
       <AskQuestionModal
         pkg={activePkg}
