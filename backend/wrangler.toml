@@ -1,0 +1,12 @@
+name = "apexhaven-mailer"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+# Optional Cloudflare Email Routing binding (if configured on apex account)
+# send_email = [
+#   { name = "MAILER", destination_address = "enquiries@apexhaveninvestments.com" }
+# ]
+
+[vars]
+DESTINATION_EMAIL = "enquiries@apexhaveninvestments.com"
+ALLOWED_ORIGIN = "https://www.apexhaveninvestments.com"

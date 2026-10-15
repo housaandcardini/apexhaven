@@ -62,7 +62,7 @@ export default function TermsPage() {
         </div>
 
         <p className="text-xs text-slate-500 pt-4 border-t border-slate-200">
-          Last revised: October 2026. For questions, contact info@apexhaveninvestments.com.
+          Last revised: October 2026. For questions, contact enquiries@apexhaveninvestments.com.
         </p>
       </div>
     </InnerPage>

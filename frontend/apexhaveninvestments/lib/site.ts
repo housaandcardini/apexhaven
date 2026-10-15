@@ -5,12 +5,7 @@ export const site = {
   description:
     "Apex Haven Investments Limited delivers transparent property and investment advisory, project procurement and building solutions, bespoke interior design, and fine art curation across Kenya.",
   phone: "+254 711 440 041",
-  email: "info@apexhaveninvestments.com",
-  emails: {
-    general: "info@apexhaveninvestments.com",
-    consultations: "consultations@apexhaveninvestments.com",
-    propertyAdvisory: "propertyadvisory@apexhaveninvestments.com",
-  },
+  email: "enquiries@apexhaveninvestments.com",
   address: "Apex Towers, 5th Floor, Westlands, Nairobi",
   hours: "Mon – Sat: 8:00am – 6:00pm",
   socials: {

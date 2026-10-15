@@ -12,9 +12,11 @@ interface SendNotificationOptions {
 }
 
 /**
- * Dispatches verified lead/contact notifications to the owner's inbox.
- * Supports Resend API (via RESEND_API_KEY) or standard webhook/SMTP,
- * and falls back to structured logging with guaranteed delivery acknowledgment.
+ * Dispatches verified lead/contact notifications to the company inbox.
+ * Priority destinations:
+ * 1. Cloudflare Worker (via CLOUDFLARE_WORKER_URL) -> delivers free via Cloudflare MailChannels / Email Routing
+ * 2. Resend API (via RESEND_API_KEY)
+ * 3. Structured Server Logging with delivery acknowledgment
  */
 export async function sendOwnerNotification({
   subject,
@@ -26,7 +28,12 @@ export async function sendOwnerNotification({
   recipientEmail: customRecipient,
   ccEmail,
 }: SendNotificationOptions) {
-  const recipientEmail = customRecipient || process.env.OWNER_EMAIL || site.email;
+  const recipientEmail =
+    customRecipient ||
+    process.env.ENQUIRIES_EMAIL ||
+    site.email ||
+    "enquiries@apexhaveninvestments.com";
+  const cloudflareWorkerUrl = process.env.CLOUDFLARE_WORKER_URL;
   const resendApiKey = process.env.RESEND_API_KEY;
 
   const htmlBody = `
@@ -82,7 +89,33 @@ export async function sendOwnerNotification({
     </div>
   `;
 
-  // 1. If RESEND_API_KEY is configured, dispatch directly via Resend HTTP API
+  // 1. Dispatch via Cloudflare Worker if configured
+  if (cloudflareWorkerUrl) {
+    try {
+      const res = await fetch(cloudflareWorkerUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: recipientEmail,
+          cc: ccEmail,
+          senderName,
+          senderEmail,
+          senderPhone,
+          subject: `[Website Enquiry] ${subject}`,
+          html: htmlBody,
+          details,
+          messageText,
+        }),
+      });
+      if (res.ok) {
+        return { success: true, provider: "cloudflare-worker" };
+      }
+    } catch (err) {
+      console.error("[Mailer] Cloudflare Worker dispatch error:", err);
+    }
+  }
+
+  // 2. Dispatch via Resend API if configured
   if (resendApiKey) {
     try {
       const res = await fetch("https://api.resend.com/emails", {
@@ -92,10 +125,10 @@ export async function sendOwnerNotification({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Apex Haven Inquiries <notifications@apexhaveninvestments.com>",
+          from: "Apex Haven Enquiries <notifications@apexhaveninvestments.com>",
           to: [recipientEmail],
           reply_to: senderEmail,
-          subject: `[New Inquiry] ${subject} - ${senderName}`,
+          subject: `[Enquiry] ${subject} - ${senderName}`,
           html: htmlBody,
         }),
       });
@@ -107,7 +140,7 @@ export async function sendOwnerNotification({
     }
   }
 
-  // 2. Structured log fallback (always recorded securely on server)
-  console.log(`[INBOX NOTIFICATION] To: ${recipientEmail} | Subject: ${subject} | From: ${senderEmail} (${senderName})`);
+  // 3. Structured log fallback
+  console.log(`[ENQUIRIES DISPATCH] To: ${recipientEmail} | Subject: ${subject} | From: ${senderEmail} (${senderName})`);
   return { success: true, provider: "logged" };
 }
