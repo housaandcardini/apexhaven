@@ -39,7 +39,7 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
 
   // Payment Selection
   const [paymentMethod, setPaymentMethod] = useState<"mpesa" | "card">("mpesa");
-  const [mpesaNumber, setMpesaNumber] = useState("+254 711 440 041");
+  const [mpesaNumber, setMpesaNumber] = useState("+254 797 235 515");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderReference, setOrderReference] = useState("");
